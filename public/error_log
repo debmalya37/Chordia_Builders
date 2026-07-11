@@ -1,0 +1,2 @@
+[18-Dec-2025 20:38:42 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home2/chordiabuilders/public_html/vendor/facade/ignition/src/SolutionProviders/MergeConflictSolutionProvider.php on line 52
+[19-Dec-2025 14:41:16 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home2/chordiabuilders/public_html/vendor/facade/ignition/src/SolutionProviders/MergeConflictSolutionProvider.php on line 52

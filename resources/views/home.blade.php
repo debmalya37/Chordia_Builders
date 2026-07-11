@@ -1,0 +1,317 @@
+@extends('layouts.header')
+
+@section('content')
+@if(!$banners->isEmpty())
+<section class="home-slider">
+<div class="slider-active">
+@foreach($banners as $banner)
+<div class="single-slider"> <img src="<?= (isset($banner->image))?asset("banner_images/$banner->image"):''; ?>" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth"> </div> @endforeach
+</div>
+</section>
+@endif
+
+
+@if(!empty($aboutus)) 
+<section class="section about-chordia">
+<div class="container">
+<div class="row flex-row-reverse"> 
+<div class="col-md-10 mx-md-auto">
+	<h2>{{$general->main_heading}}</h2>
+	<p>For over 35 years, Chordia Builders has proudly transformed the cityscape by delivering quality homes that blend luxury and affordability. We specialize in offering premium apartments
+	in Mansarovar Jaipur, designed to provide modern living with comfort and style. Our commitment is to create luxury flats in Jaipur that not only meet but 
+	exceed expectations, focusing on community well-being and sustainable development. At Vivek Chordia Builders, we understand the importance of 
+	building more than just houses — we build dream homes where families thrive. Our dedication to craftsmanship and resident satisfaction has
+	earned us the trust of countless homeowners. As the city evolves, we remain passionate about shaping spaces that bring joy, security, 
+	and elegance within reach. Choosing Chordia Builders means investing in a legacy of excellence, innovation, and heartfelt 
+	responsibility toward our residents. </p>
+	<div class="button"> <a href="{{ url('page/vision-mission') }}" class="btn">About More &nbsp; <span> <i class="fa fa-caret-right"></i> </span></a> </div>
+</div>
+</div>
+</div>
+</section>
+@endif
+
+<div class="homest">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 col-6">
+				<div class="stbox">
+					<div class="icon"> <img src="{{asset('images/static01.png')}}" width="55" height="55" alt="Projects Delivered" /> </div>
+					<div class="num"> 9 </div>
+					<div class="heading"> Projects Delivered </div>
+				</div>
+			</div>
+			<div class="col-md-3 col-6">
+				<div class="stbox">
+					<div class="icon"> <img src="{{asset('images/static02.png')}}" width="55" height="55" alt="Happy Families" /> </div>
+					<div class="num"> 2500+ </div>
+					<div class="heading"> Happy Families </div>
+				</div>
+			</div>
+			<div class="col-md-3 col-6">
+				<div class="stbox">
+					<div class="icon"> <img src="{{asset('images/static03.png')}}" width="55" height="55" alt="Area" /> </div>
+					<div class="num"> 35 </div>
+					<div class="heading"> lac (approx.) sq. ft. of area already delivered </div>
+				</div>
+			</div>
+			<div class="col-md-3 col-6">
+				<div class="stbox active">
+					<div class="icon"> <img src="{{asset('images/static04.png')}}" width="55" height="55" alt="Area" /> </div>
+					<div class="num"> 10 </div>
+					<div class="heading heading-white"> lac (approx.) sq. mt. more of area to be delivered by 2025 </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 
+
+ 
+
+@if(!$recommended->isEmpty())
+<section class="section ourproject">
+	<div class="container">
+		<h2>Ongoing Project</h2>
+		@php($i=1)
+		 @foreach($recommended as $nproject)
+			<div class="homeproject">
+				<div class="row {{$i%2==0?'flex-row-reverse':''}}">
+					<div class="col-md-7"> <img src="<?= (isset($nproject->image))?asset("project_images/$nproject->image"):asset('') ?>" width="855" height="582" alt="{{$nproject->alttag}}" class="img-fullwidth" /> </div>
+					<div class="col-md-5">
+						<div class="prtext">
+							<div class="dabba">
+								<h3>{{$nproject->title}}<br><small></small></h3>
+                                <h4>{{$nproject->sub_title}}</h4> 
+								<?php /*?><p>{!! Str::words($nproject->description, 65) !!}</p><?php */?>
+<h5>RERA No: {{$nproject->rera_no}}</h5>
+<p><i class="fa fa-map-marker"></i>  {{$nproject->address}}</p>
+								<div class="button "> <a class="btn" href="{{ url('project/'.$nproject->slug_url) }}">Know More</a> </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> 
+			@php($i++)
+			@endforeach
+	</div>
+</section> @endif
+
+ 
+
+
+<section class="section dpradvantage">
+<div class="container">
+<h2>Chordia’s Difference</h2>
+<div class="row">
+<div class="col-md-4">
+<div class="adbox">
+<div class="row">
+<div class="col-3">
+<h1 class="adcolor01">1</h1>
+</div>
+<div class="col-9">
+<h3>Luxury Flats in Jaipur</h3>
+<p>Experience premium design, top-tier materials, and flawless finishes in every luxury flat.
+ </p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="adbox">
+<div class="row">
+<div class="col-3">
+<h1 class="adcolor02">2</h1>
+</div>
+<div class="col-9">
+<h3>Choice </h3>
+<p>Stylish interiors with wonderful finish in every corner complying with superior quality craftsmanship work
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="adbox">
+<div class="row">
+<div class="col-3">
+<h1 class="adcolor03">3</h1>
+</div>
+<div class="col-9">
+<h3>Excellence</h3>
+<p>Natural lights, complete ventilation, vastu compliant and premium fixtures quality with every unit irrespective of its size
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="adbox">
+<div class="row">
+<div class="col-3">
+<h1 class="adcolor04">4</h1>
+</div>
+<div class="col-9">
+<h3>Accessibility </h3>
+<p>The wonderful experience of owning property do not stops with it rather it keeps on going with our consistent endeavors to keep you smiling always
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="adbox">
+<div class="row">
+<div class="col-3">
+<h1 class="adcolor05">5</h1>
+</div>
+<div class="col-9">
+<h3>Responsiveness</h3>
+<p>Equipped with expert team and seasoned professionals we always promote nurturing relationships with our patrons
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="adbox">
+<div class="row">
+<div class="col-3">
+<h1 class="adcolor06">6</h1>
+</div>
+<div class="col-9">
+<h3> Attention to Detail </h3>
+<p>Construction, fittings, architecture including the view, we take care of every minute detail before offering best of us
+ </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+
+
+<section class="section home-career">
+<div class="container"> 
+<h2>Why Chordia Builders?</h2>  
+<div class="expactivities">
+<div class="row">
+<div class="col-md-7">
+<img src="{{asset('images/why-us.jpg')}}" alt="residential projects in jaipur" width="855" height="582" class="img-fullwidth" />
+</div>
+<div class="col-md-5">
+<div class="eatext">
+<div class="dabba">
+<p>At Chordia Builders, we believe in building more than just homes — we build trust, value, and a better lifestyle. With over 35 years of experience in the real estate industry, we are known for delivering high-quality construction, timely possession, and customer satisfaction across all our projects.
+
+If you’re searching for flats in Mansarovar Jaipur, look no further. Our projects are located in well-connected areas, offering seamless access to schools, hospitals, shopping centers, and major transport routes. We prioritize both location and lifestyle, ensuring your new home meets every modern need.
+
+Our reputation for delivering a luxury apartment in Jaipur at affordable prices sets us apart. From elegant designs and premium finishes to thoughtful layouts and community spaces, every Chordia project reflects our commitment to excellence.
+
+We also provide full legal transparency, RERA compliance, and dedicated customer support to make your home-buying experience smooth and stress-free.
+
+Join hundreds of happy families who have made Chordia Builders their trusted choice. Whether you're a first-time homebuyer or looking to upgrade your lifestyle, we’re here to help you find the perfect place to call home.</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+ 
+
+<section class="section media">
+<div class="container"> 
+<h2>Get in touch with us</h2> 
+<div class="job-openings"> 
+<div class="contact-form-area"> 
+<form method="POST" class="form" autocomplete="off" id="quickid" action="{{route('common.send')}}">
+<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+<div class="row">
+<div class="col-sm-4">
+<div class="form-group"> 
+<input name="name" id="name" type="text" placeholder="Full Name">
+<span class="text-danger error-text name_error"> </span>
+</div>
+</div> 
+<div class="col-sm-4">
+<div class="form-group"> 
+<input name="email" id="email" type="email" placeholder="Email Address">
+<span class="text-danger error-text email_error"> </span>
+</div>
+</div>
+<div class="col-sm-4">
+<div class="form-group"> 
+<input name="phone" id="phone" type="text" placeholder="Phone No.">
+<span class="text-danger error-text phone_error"> </span>
+</div>
+</div>
+</div> 
+<div class="row">
+<div class="col-sm-4">
+<div class="form-group"> 
+<input name="city" id="city" type="text" placeholder="City">
+<span class="text-danger error-text city_error"> </span>
+</div>
+</div> 
+<div class="col-sm-8">
+<div class="form-group"> 
+<input name="messages" id="messages" type="text" placeholder="Message">
+</div>
+</div> 
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+@if ($errors->has('g-recaptcha-response'))
+<span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+@endif
+<span class="text-danger small error-text g-recaptcha-response_error"> </span>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div class="form-group">
+<div class="button text-center">
+<input type="hidden" class="form-control" name="page_url" id="page_url" value="{{url()->current()}}">
+<button type="submit" id="quickid" class="btn">Submit</button>
+</div>
+</div>
+</div>
+</div>
+</form>
+</div>   
+</div>  
+<div>   
+</section>
+
+ @if(!$testimonials->isEmpty())
+<section class="testimonial section">
+<div class="container">
+<h2>Customers Speak</h2> 
+<div class="testimonial-slider"> 
+@foreach($testimonials as $testimonial)
+<div class="single-testimonial">
+<div class="main-content"> 
+<p>{!! $testimonial->description !!}</p>    
+</div>
+<div class="main-footer">
+<div class="testiimg"><img src="{{asset('images/testimonial1.jpg')}}" width="200" height="200" alt="#"></div>    
+<div class="testicite">
+<div class="testimonial__name">{{$testimonial->title}} </div>
+<div class="testimonial__title">{{$testimonial->designation}} </div>
+</div>
+</div> 
+</div>
+@endforeach                  
+</div>
+</div>
+</section>
+@endif
+
+
+@endsection     

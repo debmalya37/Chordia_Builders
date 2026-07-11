@@ -1,0 +1,279 @@
+@charset "utf-8";
+/* CSS Document */
+.callus {
+	margin: 0;
+    padding: 0;
+    position: fixed;
+    bottom: 75px;
+    right: 5px;
+    width: 60px!important;
+    z-index: 99999999999;
+    float: right;
+}
+	.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+.swiper-slide {
+  text-align: center;
+  /*font-size: 18px;*/
+  background: #fff;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.flex-card {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.flex-card__text, .flex-card__image {
+  width: 95%;
+}
+.flex-card__text {
+  text-align: left;
+  padding: 1%;
+}
+.flex-card__image {
+  background-image: url(https://stripe.com/img/v3/payments/overview/photos/charity_water.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 300px;
+}
+@media screen and (min-width: 768px) {
+  .flex-card {
+    flex-wrap: nowrap;
+  }
+  .flex-card__text {
+    width: 66%;
+  } 
+  .flex-card__image {
+    width: 33%;
+  }
+}
+/**
+ * Swiper Slider Plugin Custom Styles
+ */
+	.modal1:target:before {
+    display: none;
+}
+.modal1:before {
+    content:"";
+    display: block;
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+.modal1 .modal-dialog {
+    background: #fefefe;
+    border: #333333 solid 1px;
+    border-radius: 5px;
+    margin-left: -200px;
+    position: fixed;
+    left: 50%;
+    z-index: 11;
+    width: 360px;
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+    -webkit-transition: -webkit-transform 0.3s ease-out;
+    -moz-transition: -moz-transform 0.3s ease-out;
+    -o-transition: -o-transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+    top: 20%;
+}
+.modal1:target .modal-dialog {
+    top: -100%;
+    -webkit-transform: translate(0, -500%);
+    -ms-transform: translate(0, -500%);
+    transform: translate(0, -500%);
+}
+.modal-body {
+    padding: 20px;
+}
+.modal-header, .modal-footer {
+    padding: 10px 20px;
+}
+.modal-footer {
+    border-top: #eeeeee solid 1px;
+    text-align: right;
+}.modal1:target:before {
+    display: none;
+}
+.modal1:before {
+    content:"";
+    display: block;
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+/*.modal1 .modal-dialog {
+    background: #fefefe;
+    border: #333333 solid 1px;
+    border-radius: 5px;
+    margin-left: -200px;
+    position: fixed;
+    left: 50%;
+    z-index: 11;
+    width: 360px;
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+    -webkit-transition: -webkit-transform 0.3s ease-out;
+    -moz-transition: -moz-transform 0.3s ease-out;
+    -o-transition: -o-transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+    top: 20%;
+}*/
+.modal1 .modal-dialog {
+	background: #fefefe00;
+    border: none;
+    border-radius: 5px;
+    margin-left: -120px;
+    position: fixed;
+    left: 50%;
+    z-index: 11;
+    width: 360px;
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+    -webkit-transition: -webkit-transform 0.3s ease-out;
+    -moz-transition: -moz-transform 0.3s ease-out;
+    -o-transition: -o-transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+    top: 20%;
+}
+.modal1:target .modal-dialog {
+    top: -100%;
+    -webkit-transform: translate(0, -500%);
+    -ms-transform: translate(0, -500%);
+    transform: translate(0, -500%);
+}
+.modal-body {
+    padding: 20px;
+} 
+.modal-header, .modal-footer {
+    padding: 10px 20px;
+}
+.modal-footer {
+    border-top: #eeeeee solid 1px; 
+    text-align: right;
+} 
+.modal-header a
+{
+font-size: 40px;
+float: right;
+margin-right:40px;
+}
+.modal-header
+{
+border-bottom:none !important;
+padding:0px;
+    height: 40px;
+}
+.mob1
+{
+display:none !important;
+}
+.desk1
+{
+display:block !important;
+}
+@media only screen and (max-width: 600px) {
+.flex-card {
+    width: 80%;
+	}
+.swiper-button-prev
+{
+left:0px !important;
+}
+.swiper-button-next
+{
+right:0px !important;
+}
+.mob1
+{
+display:block !important;
+}
+.desk1
+{
+display:none !important;
+}
+}
+.btn-close {
+    color: #aaaaaa;
+    font-size: 30px;
+    text-decoration: none;
+    position: absolute;
+    right: 5px;
+    top: 0;
+}
+.btn-close:hover {
+    color: #919191;
+}
+.bkbtn
+{
+background: #white !important;
+color: white !important;
+font-weight: 600 !important;
+}
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) { 
+    .popup {
+      width: 85% !important;
+    }
+    
+    .swiper-button-next:after, .swiper-button-prev:after {
+    font-family: swiper-icons;
+    text-transform: none!important;
+    letter-spacing: 0;
+    text-transform: none;
+    font-variant: initial;
+    line-height: 1;
+}
+    
+}
+@media screen and (max-width: 576px){
+  .mob1
+  {
+	  display:block !important;
+  }
+  .desk1
+  {
+	  display:none !important;
+  }
+}
+.mob1
+{
+  display:none;
+}
+.desk1
+{
+  display:block;
+}
+section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
