@@ -63,21 +63,23 @@
 
 <link rel="stylesheet" href="{{asset('styles/responsive.css')}}">
 <link rel="stylesheet" href="{{asset('styles/toastr.css')}}">
-<script src="{{asset('jquery/jquery.min.js')}}"></script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17559730445">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<!-- Delayed Google tag (gtag.js) & Events to improve Initial Page Load -->
+<script type="text/javascript">
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            var script = document.createElement('script');
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17559730445';
+            script.async = true;
+            document.head.appendChild(script);
 
-  gtag('config', 'AW-17559730445');
-</script>
-<!-- Event snippet for Submit lead form conversion page -->
-<script>
-  gtag('event', 'conversion', {'send_to': 'AW-17559730445/z5lHCMvWj8IbEI3ykLVB'});
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-17559730445');
+            gtag('event', 'conversion', {'send_to': 'AW-17559730445/z5lHCMvWj8IbEI3ykLVB'});
+        }, 3500); // Delays execution by 3.5 seconds so visuals load instantly
+    });
 </script>
 
 </head>
@@ -254,9 +256,9 @@
 <!-- End Header -->
 
 
-
-@yield('content')
-
+<main>
+    @yield('content')
+</main>
 
 
 <!-- Footer -->
@@ -297,7 +299,7 @@
 
 
 
-<div class="row">	 
+<div class="row">    
 
     <div class="col-lg-4 col-12">
 
@@ -315,7 +317,7 @@
 
                 <li><i class="fa fa-envelope"></i> <a href="mailto:{{ GeneralHelper::Generals()->email }}">{{ GeneralHelper::Generals()->email }}</a></li>
 
-                <li><i class="fa fa-globe"></i>  <a href="{{ GeneralHelper::Generals()->weburl }}">{{ GeneralHelper::Generals()->weburl }}</a></li>									
+                <li><i class="fa fa-globe"></i>  <a href="{{ GeneralHelper::Generals()->weburl }}">{{ GeneralHelper::Generals()->weburl }}</a></li>                                
 
             </ul> 
 
@@ -381,7 +383,7 @@
 
                 <li><i class="fa fa-hand-o-up"></i> MEET THE CITY </li>
 
-                <li><i class="fa fa-building"></i> REAL ESTATE CONSULTANT</li> 								
+                <li><i class="fa fa-building"></i> REAL ESTATE CONSULTANT</li>                              
 
             </ul> <?php */?>
 
@@ -479,109 +481,69 @@
 
 {!! GeneralHelper::Generals()->chat_widget !!}
 
-<!-- Jquery JS-->
 
+<!-- JS Dependencies (Deferred for Performance) -->
+<!-- JS Dependencies (Moved to footer for performance, executing normally) -->
+<script src="{{asset('jquery/jquery.min.js')}}"></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="{{asset('jquery/toastr.min.js')}}"></script>
 <script src="{{asset('jquery/quick_enquiry.js')}}"></script>
 <script src="{{asset('jquery/jquery-migrate.min.js')}}"></script>
-
-<!-- Popper JS-->
-
 <script src="{{asset('jquery/popper.min.js')}}"></script>
-
-<!-- Bootstrap JS-->
-
 <script src="{{asset('jquery/bootstrap.min.js')}}"></script> 
-
-<!-- Jquery Steller JS -->
-
 <script src="{{asset('jquery/jquery.stellar.min.js')}}"></script>
-
-<!-- Particle JS -->
-
 <script src="{{asset('jquery/particles.min.js')}}"></script>
-
-<!-- Fancy Box JS-->
-
 <script src="{{asset('jquery/facnybox.min.js')}}"></script>
-
-<!-- Magnific Popup JS-->
-
 <script src="{{asset('jquery/jquery.magnific-popup.min.js')}}"></script>
-
-<!-- Masonry JS-->
-
 <script src="{{asset('jquery/masonry.pkgd.min.js')}}"></script>
-
-<!-- Circle Progress JS -->
-
 <script src="{{asset('jquery/circle-progress.min.js')}}"></script>
-
-<!-- Owl Carousel JS-->
-
 <script src="{{asset('jquery/owl.carousel.min.js')}}"></script>
-
-<!-- Waypoints JS-->
-
 <script src="{{asset('jquery/waypoints.min.js')}}"></script>
-
-<!-- Slick Nav JS-->
-
 <script src="{{asset('jquery/slicknav.min.js')}}"></script>
-
-<!-- Counter Up JS -->
-
 <script src="{{asset('jquery/jquery.counterup.min.js')}}"></script>
-
-<!-- Easing JS-->
-
 <script src="{{asset('jquery/easing.min.js')}}"></script>
-
-<!-- Wow Min JS-->
-
 <script src="{{asset('jquery/wow.min.js')}}"></script>
-
-<!-- Scroll Up JS-->
-
 <script src="{{asset('jquery/jquery.scrollUp.min.js')}}"></script>
-
-<!-- Main JS-->
-
 <script src="{{asset('jquery/main.js')}}"></script>
+
 
 <script>
     var searchForm = document.getElementById('search-form');
-    searchForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        var formData = new FormData(searchForm);
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-    if (this.readyState === 4 && this.status === 200) {
-        var results = JSON.parse(this.responseText);
-      
+    // Ensure form exists before attaching event listener to prevent console errors
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var formData = new FormData(searchForm);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    var results = JSON.parse(this.responseText);
+                }
+            };
+            xhr.open('GET', '/search?' + new URLSearchParams(formData).toString());
+            xhr.send();
+        });
     }
-};
-        xhr.open('GET', '/search?' + new URLSearchParams(formData).toString());
-        xhr.send();
-    });
 </script>
 <script>
 function myFunction() {
-var dots = document.getElementById("dots");
-var moreText = document.getElementById("more");
-var btnText = document.getElementById("myBtn");
+    var dots = document.getElementById("dots");
+    var moreText = document.getElementById("more");
+    var btnText = document.getElementById("myBtn");
 
-if (dots.style.display === "none") {
-dots.style.display = "inline";
-btnText.innerHTML = "[+]";
-moreText.style.display = "none";
-} else {
-dots.style.display = "none";
-btnText.innerHTML = "[-]";
-moreText.style.display = "inline";
-}
+    // Added safety check to ensure elements exist on the page
+    if (dots && moreText && btnText) {
+        if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "[+]";
+            moreText.style.display = "none";
+        } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "[-]";
+            moreText.style.display = "inline";
+        }
+    }
 } 
 </script>
 </body>

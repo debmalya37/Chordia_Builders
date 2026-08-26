@@ -1,0 +1,46 @@
+name: Deploy Laravel to cPanel
+
+on:
+  push:
+    branches:
+      - main # Change this to 'master' if your local git branch is called master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4 # Updated to v4 to prevent deprecation warnings
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1' 
+
+    - name: Install Composer Dependencies
+      run: composer install --optimize-autoloader --no-dev
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4 # Updated to v4
+      with:
+        node-version: '18'
+
+    - name: Install NPM and Compile Assets
+      run: |
+        npm install
+        npm run prod 
+
+    - name: Sync Files via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: /
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          .env
+          .env.example
