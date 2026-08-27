@@ -13,8 +13,8 @@
 	<!--CSS styles-->
 <link rel="stylesheet" media="all" href="css/bundle.min.css" />
 <!--Google fonts-->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:300,500&amp;subset=latin-ext" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700&amp;subset=latin-ext" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,500&amp;subset=latin-ext&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700&amp;subset=latin-ext&display=swap" rel="stylesheet">
 <link rel='stylesheet' href='https://unpkg.com/swiper/swiper-bundle.min.css'>
 
 <link rel="stylesheet" media="all" href="css/style.css" />

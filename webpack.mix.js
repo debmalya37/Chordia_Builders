@@ -5,10 +5,10 @@ mix.js('resources/js/app.js', 'public/js')
        require('tailwindcss'),
        require('autoprefixer'),
    ])
-   // 1. Extract third-party libraries into a vendor.js file
+  
    .extract(['alpinejs', 'axios', 'lodash']); 
 
-// 2. Add versioning for cache-busting in production
+// 3. Add versioning for cache-busting in production
 if (mix.inProduction()) {
     mix.version();
 }

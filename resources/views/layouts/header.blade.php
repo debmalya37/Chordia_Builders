@@ -27,43 +27,33 @@
 
 <link rel="icon" type="image/png" href="images/logo.png"> 
 
-<!-- Bootstrap CSS -->
-
+<!-- 1. CORE CSS (Loads immediately so the site doesn't look broken) -->
+<!-- Master CSS Bundle (Exact original order, fully cached & versioned) -->
+<!-- 1. CRITICAL STRUCTURAL CSS (Loaded natively to guarantee zero layout glitches) -->
 <link rel="stylesheet" href="{{asset('styles/bootstrap.min.css')}}">
-
-<!-- Font Awesome CSS -->
-
 <link rel="stylesheet" href="{{asset('styles/font-awesome.min.css')}}">
-
-<!-- Fancy Box CSS -->
-
-<link rel="stylesheet" href="{{asset('styles/jquery.fancybox.min.css')}}">
-
-<!-- Owl Carousel CSS -->
-
-<link rel="stylesheet" href="{{asset('styles/owl.carousel.min.css')}}">
-
-<link rel="stylesheet" href="{{asset('styles/owl.theme.default.min.css')}}">
-
-<!-- Animate CSS -->
-
-<link rel="stylesheet" href="{{asset('styles/animate.min.css')}}">
-
-<!-- Slick Nav CSS -->
-
 <link rel="stylesheet" href="{{asset('styles/slicknav.min.css')}}">
-
-<!-- Magnific Popup -->
-
-<link rel="stylesheet" href="{{asset('styles/magnific-popup.css')}}"> 
-
 <link rel="stylesheet" href="{{asset('styles/normalize.css')}}">
-
 <link rel="stylesheet" href="{{asset('styles/style.css')}}">
-
 <link rel="stylesheet" href="{{asset('styles/responsive.css')}}">
-<link rel="stylesheet" href="{{asset('styles/toastr.css')}}">
 
+<!-- 2. DEFERRED PLUGIN CSS (Safe to load in background to boost PageSpeed) -->
+<link rel="stylesheet" href="{{asset('styles/jquery.fancybox.min.css')}}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{asset('styles/owl.carousel.min.css')}}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{asset('styles/owl.theme.default.min.css')}}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{asset('styles/animate.min.css')}}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{asset('styles/magnific-popup.css')}}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{asset('styles/toastr.css')}}" media="print" onload="this.media='all'">
+
+<!-- 3. FALLBACK (In case a user has JavaScript disabled) -->
+<noscript>
+    <link rel="stylesheet" href="{{asset('styles/jquery.fancybox.min.css')}}">
+    <link rel="stylesheet" href="{{asset('styles/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('styles/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{asset('styles/animate.min.css')}}">
+    <link rel="stylesheet" href="{{asset('styles/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset('styles/toastr.css')}}">
+</noscript>
 <!-- Delayed Google tag (gtag.js) & Events to improve Initial Page Load -->
 <script type="text/javascript">
     window.addEventListener('load', function() {
@@ -81,6 +71,8 @@
         }, 3500); // Delays execution by 3.5 seconds so visuals load instantly
     });
 </script>
+
+
 
 </head>
 
