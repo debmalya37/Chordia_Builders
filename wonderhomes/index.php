@@ -3,109 +3,35 @@
 
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Required Meta Tags -->
 <meta charset="utf-8">
-<!-- TITLE -->
 <title>Wonder homes 2/3 BHK Apartments</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<!-- Bootstrap.Min.CSS  --> 
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<!-- Owl.Carousel.Min.CSS -->
-<link rel="stylesheet" href="css/owl.carousel.min.css">
-<!-- Owl.Theme.Default.Min.CSS -->
-<link rel="stylesheet" href="css/owl.theme.default.min.css">
-<!-- Animate.CSS -->
-		<link rel="stylesheet" href="css/animate.css">
-<!-- Font-Awesome.Min.CSS -->
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<!-- Flaticon.CSS -->
-<link rel="stylesheet" href="font/flaticon.css">
-<!-- Magnific-Popup.CSS -->
-		<link rel="stylesheet" href="css/magnific-popup.css">
-<!-- Style.CSS -->
-<link rel="stylesheet" href="css/style.css">
-<!-- Responsive.CSS -->
-<link rel="stylesheet" href="css/responsive.css">
-<!-- Favicon -->
 <link rel="icon" type="image/png" href="images/favicon.png">
-		
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script>
-	$(document).ready(function(){
-		$("#myModal").modal('show');
-	});
-</script>
+
+<!-- 1. CRITICAL CSS (Loads immediately) -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="font/flaticon.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+
+<!-- 2. DEFERRED CSS (Loads in background) -->
+<link rel="stylesheet" href="css/owl.carousel.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/owl.theme.default.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/animate.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="css/magnific-popup.css" media="print" onload="this.media='all'">
+
+<!-- 3. COMBINED INLINE STYLES -->
 <style>
-.float{
-	position:fixed;
-	z-index: 999;
-	width:100px;
-	height:100px;
-	bottom:110px;
-	right:5px;
-	color:#FFF;
-	text-align:center;
-}
-
-.float2{
-	position:fixed;
-	z-index: 999;
-	width:110px;
-	height:110px;
-	bottom:230px;
-	right:10px;
-	color:#FFF;
-	text-align:center;
-}
-
-.my-float{
-	margin-top:22px;
-}
-
-.modal-dialog 
-{
-max-width: 860px !important;
-	padding:10px;
-}	
-
-.modal 
-{
-z-index: 999999 !important;
-}
-
-.modal-content p 
-{
-padding: 20px !important;
-}	
-.fade.show {
-z-index: 9999;
-}
-.float1{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:80px;
-	right:20px;
-	background-color:#25d366;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-font-size:30px;
-	box-shadow: 2px 2px 3px #999;
-z-index:100;
-}
-
-.my-float1{
-	margin-top:16px;
-}
-
-
-</style>
-<style>
-#more {display: none;}
+.float{position:fixed;z-index:999;width:100px;height:100px;bottom:110px;right:5px;color:#FFF;text-align:center;}
+.float2{position:fixed;z-index:999;width:110px;height:110px;bottom:230px;right:10px;color:#FFF;text-align:center;}
+.my-float{margin-top:22px;}
+.modal-dialog{max-width:860px !important;padding:10px;}   
+.modal{z-index:999999 !important;}
+.modal-content p{padding: 20px !important;}   
+.fade.show{z-index:9999;}
+.float1{position:fixed;width:60px;height:60px;bottom:80px;right:20px;background-color:#25d366;color:#FFF;border-radius:50px;text-align:center;font-size:30px;box-shadow: 2px 2px 3px #999;z-index:100;}
+.my-float1{margin-top:16px;}
+#more{display: none;}
 </style>
 </head>
 
@@ -318,7 +244,7 @@ contact us
 <div class="row">
 <div class="col-lg-4" style="margin-top: 20px;">
 <div class="experience-video"> 
-<img src="images/about-1.jpg" alt="">
+<img src="images/about-1.jpg" alt="" loading="lazy">
 <div class="play-video-icon">
 <div class="sonar-wrapper">
 <div class="sonar-emitter">
@@ -458,7 +384,7 @@ The milestone achieved by Choradia's group of builders is a result of hard work,
 </div>
 <div class="col-lg-4 p-0 choose-wraps">
 <div class="choose-bg"></div>
-<img class="choose-img-none" src="images/choose-bg.jpg" alt="Choose">
+<img class="choose-img-none" src="images/choose-bg.jpg" alt="Choose" loading="lazy">
 </div>
 </div>
 </div>
@@ -471,27 +397,27 @@ The milestone achieved by Choradia's group of builders is a result of hard work,
 <div class="row">
 <div class="col-lg-3 col-md-6 col-sm-6 pl-0 pr-0">
 <div class="single-box box-border-left">
-<img src="images/flat.png">
+<img src="images/flat.png" loading="lazy">
 <h3>A township of<br>120 flats (2/3 BHK)</h3>
 </div>
 </div>
 <div class="col-lg-3 cooffset-sm-3 offset-lg-0l-md-6 col-sm-6 pl-0 pr-0">
 <div class="single-box">
-<img src="images/hall.png">
+<img src="images/hall.png" loading="lazy">
 <h3>Elite Club House<br>&nbsp;</h3>
 </div>
 </div>
 					
 <div class="col-lg-3 cooffset-sm-3 offset-lg-0l-md-6 col-sm-6 pl-0 pr-0">
 <div class="single-box">
-<img src="images/garden.png">
+<img src="images/garden.png" loading="lazy">
 <h3>Theme garden on terrace<br>&nbsp;</h3>
 </div>
 </div>
 					   
 <div class="col-lg-3 cooffset-sm-3 offset-lg-0l-md-6 col-sm-6 pl-0 pr-0">
 <div class="single-box box-border-right">
-<img src="images/party.png">
+<img src="images/party.png" loading="lazy">
 <h3>Separate party terrace for each tower</h3>
 </div>
 </div>
@@ -548,34 +474,34 @@ The milestone achieved by Choradia's group of builders is a result of hard work,
 <div class="row">
 <div class="col-lg-6 col-md-6">
 <div class="single-service mb-30">
-<img src="images/f1.png" width="100%">
+<img src="images/f1.png" width="100%" loading="lazy">
 </div>
 </div>
 <div class="col-lg-6 col-md-6">
 <div class="single-service mb-30">
-<img src="images/f2.png" width="100%">
+<img src="images/f2.png" width="100%" loading="lazy">
 </div>
 </div>
 
 <div class="col-lg-6 col-md-6">
 <div class="single-service mb-30">
-<img src="images/f3.png" width="100%">
+<img src="images/f3.png" width="100%" loading="lazy">
 </div>
 </div>
 <div class="col-lg-6 col-md-6">
 <div class="single-service mb-30">
-<img src="images/f4.png" width="100%">
+<img src="images/f4.png" width="100%" loading="lazy">
 </div>
 </div>
 
 <div class="col-lg-6 col-md-6">
 <div class="single-service mb-30">
-<img src="images/f5.png" width="100%">
+<img src="images/f5.png" width="100%" loading="lazy">
 </div>
 </div>
 <div class="col-lg-6 col-md-6">
 <div class="single-service mb-30">
-<img src="images/f6.png" width="100%">
+<img src="images/f6.png" width="100%" loading="lazy">
 </div>
 </div>
 
@@ -599,7 +525,7 @@ The milestone achieved by Choradia's group of builders is a result of hard work,
 <div class="row">
 <div class="col-lg-2 col-md-6">
 <div class="single-service mb-30">
-<img src="images/a1.png">
+<img src="images/a1.png" loading="lazy">
 <p>Power Backup
 Common Area</p>
 </div>
@@ -607,14 +533,14 @@ Common Area</p>
 
 <div class="col-lg-2 col-md-6">
 <div class="single-service mb-30">
-<img src="images/a3.png">
+<img src="images/a3.png" loading="lazy">
 <p>Rainwater<br>
 Harvesting</p>
 </div>
 </div>
 <div class="col-lg-2 col-md-6">
 <div class="single-service mb-30">
-<img src="images/a4.png">
+<img src="images/a4.png" loading="lazy">
 <p>CCTV<br>
 Camera</p>
 </div>
@@ -622,58 +548,58 @@ Camera</p>
 
 <div class="col-lg-2 col-md-6">
 <div class="single-service mb-30">
-<img src="images/a5.png">
+<img src="images/a5.png" loading="lazy">
 <p>Highspeed<br>
 Lift</p>
 </div>
 </div>
 <div class="col-lg-2 col-md-6">
 <div class="single-service mb-30">
-<img src="images/a6.png">
+<img src="images/a6.png" loading="lazy">
 <p>Earthquake<br>
 Resistant</p>
 </div>
 </div>
 <div class="col-lg-2 col-md-6">
 <div class="single-service mb-30">
-<img src="images/a7.png">
+<img src="images/a7.png" loading="lazy">
 <p>Fire<br>
 Equipment</p>
 </div>
 </div>
 <div class="col-lg-2 col-md-6">
 <div class="single-service mb-30">
-<img src="images/a8.png">
+<img src="images/a8.png" loading="lazy">
 <p>Yoga Deck</p>
 </div>
 </div>
 <div class="col-lg-2 col-md-6">
 <div class="single-service mb-30">
-<img src="images/a9.png">
+<img src="images/a9.png" loading="lazy">
 <p>E-Rikshaw</p>
 </div>
 </div>
 <div class="col-lg-2 col-md-6">
 <div class="single-service mb-30">
-<img src="images/a10.png">
+<img src="images/a10.png" loading="lazy">
 <p>Parking</p>
 </div>
 </div>
 <div class="col-lg-2 col-md-6">
 <div class="single-service mb-30">
-<img src="images/a11.png">
+<img src="images/a11.png" loading="lazy">
 <p>Gymnasium</p>
 </div>
 </div>
 <div class="col-lg-2 col-md-6">
 <div class="single-service mb-30">
-<img src="images/a12.png">
+<img src="images/a12.png" loading="lazy">
 <p>Security</p>
 </div>
 </div>
 <div class="col-lg-2 col-md-6">
 <div class="single-service mb-30">
-<img src="images/a14.png">
+<img src="images/a14.png" loading="lazy">
 <p>Swimming
 Pool</p>
 </div>
@@ -796,33 +722,33 @@ send us now
  
 
 <!-- Jquery-3.2.1.Slim.Mim.JS -->
-<script src="js/jquery-3.2.1.slim.min.js"></script>
+<script src="js/jquery-3.2.1.slim.min.js" defer></script>
 <!-- Popper.Mim.JS -->
-<script src="js/popper.min.js"></script>
+<script src="js/popper.min.js" defer ></script>
 <!-- Bootstrap.Mim.JS -->
-<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js" defer></script>
 <!-- Meanmenu.JS -->
-<script src="js/jquery.meanmenu.js"></script>
+<script src="js/jquery.meanmenu.js" defer></script>
 <!-- Magnific.Popup.Min.JS -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js" defer></script>
 <!-- Owl.Carousel.Min.JS -->
-<script src="js/owl.carousel.min.js"></script>
+<script src="js/owl.carousel.min.js" defer></script>
 <!-- Wow.Min.JS -->
-		<script src="js/wow.min.js"></script>
+		<script src="js/wow.min.js" defer></script>
 <!-- Waypoints.Min.JS -->
-		<script src="js/waypoints.min.js"></script>
+		<script src="js/waypoints.min.js" defer></script>
 		<!-- Jquery.Counterup.Min.JS -->
-		<script src="js/jquery.counterup.min.js"></script>
+		<script src="js/jquery.counterup.min.js" defer></script>
 		<!-- Jquery.Mixitup.Min.JS -->
-		<script src="js/jquery.mixitup.min.js"></script>
+		<script src="js/jquery.mixitup.min.js" defer></script>
 		<!-- Form Validator JS -->
-		<script src="js/form-validator.min.js"></script>
+		<script src="js/form-validator.min.js" defer></script>
 		<!-- Contact JS -->
-		<script src="js/contact-form-script.js"></script>
+		<script src="js/contact-form-script.js" defer></script>
 		<!-- Ajaxchimp JS -->
-		<script src="js/jquery.ajaxchimp.min.js"></script>
+		<script src="js/jquery.ajaxchimp.min.js" defer></script>
 <!-- Active.JS -->
-<script src="js/active.js"></script>
+<script src="js/active.js" defer></script>
 		
 <script>
 function myFunction() {
@@ -841,6 +767,15 @@ function myFunction() {
   }
 }
 </script>
+<!-- Put this right above </body> -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#myModal").modal('show');
+    });
+</script>
+</body>
 </body>
 
 </html>
