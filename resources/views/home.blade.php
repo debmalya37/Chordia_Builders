@@ -10,17 +10,13 @@
 <div class="single-slider"> 
     @if(isset($banner->image))
         @php
-            // Extracts the base filename (e.g., 'slide1' from 'slide1.jpg')
             $filename = pathinfo($banner->image, PATHINFO_FILENAME);
         @endphp
-        <picture>
-            <!-- Modern Browsers: WebP -->
-            <source srcset="{{ asset("banner_images/webp/{$filename}.webp") }}" type="image/webp">
-            <!-- Fallback: JPG/PNG -->
-            <img src="{{ asset("banner_images/{$banner->image}") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth">
-        </picture>
+        
+        <!-- Direct WebP loading (No fallback for old browsers) -->
+        <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth" fetchpriority="high">
     @endif
-</div> 
+</div>
 @endforeach
 </div>
 </section>
