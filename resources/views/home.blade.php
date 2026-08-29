@@ -14,7 +14,7 @@
         @endphp
         
         <!-- Direct WebP loading (No fallback for old browsers) -->
-        <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth" fetchpriority="high">
+        <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth">
     @endif
 </div>
 @endforeach
