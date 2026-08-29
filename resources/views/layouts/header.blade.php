@@ -32,7 +32,8 @@
 <link rel="preload" href="{{asset('styles/bootstrap.min.css')}}" as="style">
 <link rel="preload" href="{{asset('styles/style.css')}}" as="style">
 <link rel="preload" href="{{asset('styles/responsive.css')}}" as="style">
-
+<!-- Forces the browser to fetch the LCP banner instantly -->
+<link rel="preload" as="image" href="{{ asset('banner_images/webp/chordia-banner-1725869556.webp') }}" type="image/webp">
 <!-- Prevent Layout Shift for Deferred Font Awesome Icons -->
 <style>
     .header-menu .nav.menu > li > a > i.fa-angle-down {
@@ -44,13 +45,14 @@
 
 <!-- 2. CRITICAL STRUCTURAL CSS (Loaded natively to guarantee zero layout glitches) -->
 <link rel="stylesheet" href="{{asset('styles/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('styles/font-awesome.min.css')}}"><!-- Moved here to fix CLS -->
 <link rel="stylesheet" href="{{asset('styles/slicknav.min.css')}}">
 <link rel="stylesheet" href="{{asset('styles/normalize.css')}}">
 <link rel="stylesheet" href="{{asset('styles/style.css')}}">
 <link rel="stylesheet" href="{{asset('styles/responsive.css')}}">
 
 <!-- 3. DEFERRED PLUGIN CSS (Safe to load in background to boost PageSpeed) -->
-<link rel="stylesheet" href="{{asset('styles/font-awesome.min.css')}}" media="print" onload="this.media='all'">
+
 <link rel="stylesheet" href="{{asset('styles/jquery.fancybox.min.css')}}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{asset('styles/owl.carousel.min.css')}}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{asset('styles/owl.theme.default.min.css')}}" media="print" onload="this.media='all'">

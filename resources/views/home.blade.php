@@ -6,6 +6,7 @@
 @if(!$banners->isEmpty())
 <section class="home-slider">
 <div class="slider-active">
+@php $isFirst = true; @endphp
 @foreach($banners as $banner)
 <div class="single-slider"> 
     @if(isset($banner->image))
@@ -13,8 +14,14 @@
             $filename = pathinfo($banner->image, PATHINFO_FILENAME);
         @endphp
         
-        <!-- Direct WebP loading (No fallback for old browsers) -->
-        <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth">
+        @if($isFirst)
+            <!-- Single WebP for Desktop & Mobile (Eager loaded for instant LCP) -->
+            <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth" fetchpriority="high">
+            @php $isFirst = false; @endphp
+        @else
+            <!-- Single WebP for subsequent slides (Lazily loaded) -->
+            <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth" loading="lazy">
+        @endif
     @endif
 </div>
 @endforeach
@@ -22,13 +29,11 @@
 </section>
 @endif
 
-
 @if(!empty($aboutus)) 
 <section class="section about-chordia">
 <div class="container">
 <div class="row flex-row-reverse"> 
 <div class="col-md-10 mx-md-auto">
-    <!-- 2. Changed to H1 for SEO (Page must have one H1), kept h2 styling -->
     <h1 class="h2">{{$general->main_heading}}</h1>
     <p>For over 35 years, Chordia Builders has proudly transformed the cityscape by delivering quality homes that blend luxury and affordability. We specialize in offering premium apartments
     in Mansarovar Jaipur, designed to provide modern living with comfort and style. Our commitment is to create luxury flats in Jaipur that not only meet but 
@@ -47,7 +52,6 @@
 <div class="homest">
     <div class="container">
         <div class="row">
-            <!-- 3. Added loading="lazy" to below-the-fold images and converted to picture -->
             <div class="col-md-3 col-6">
                 <div class="stbox">
                     <div class="icon"> 
@@ -128,7 +132,7 @@
                                 <h4>{{$nproject->sub_title}}</h4> 
                                 
                                 <h5>RERA No: {{$nproject->rera_no}}</h5>
-                                <p><i class="fa fa-map-marker"></i>  {{$nproject->address}}</p>
+                                <p><i class="fa fa-map-marker"></i> {{$nproject->address}}</p>
                                 <div class="button "> <a class="btn" href="{{ url('project/'.$nproject->slug_url) }}" aria-label="Know more about {{$nproject->title}}">Know More</a> </div>
                             </div>
                         </div>
@@ -149,7 +153,6 @@
 <div class="adbox">
 <div class="row">
 <div class="col-3">
-<!-- 4. Replaced incorrect <h1> tags with styling divs to fix accessibility hierarchy -->
 <div class="h1 adcolor01">1</div>
 </div>
 <div class="col-9">
@@ -269,7 +272,6 @@ Join hundreds of happy families who have made Chordia Builders their trusted cho
 <div class="row">
 <div class="col-sm-4">
 <div class="form-group"> 
-<!-- 5. Added aria-labels to form inputs for screen readers -->
 <input name="name" id="name" type="text" placeholder="Full Name" aria-label="Full Name">
 <span class="text-danger error-text name_error"> </span>
 </div>
@@ -336,7 +338,6 @@ Join hundreds of happy families who have made Chordia Builders their trusted cho
 <p>{!! $testimonial->description !!}</p>    
 </div>
 <div class="main-footer">
-<!-- 6. Fixed missing alt text on testimonial images and converted to picture -->
 <div class="testiimg">
     <picture>
         <source srcset="{{asset('images/webp/testimonial1.webp')}}" type="image/webp">
