@@ -28,16 +28,29 @@
 <link rel="icon" type="image/png" href="images/logo.png"> 
 
 <!-- 1. CORE CSS (Loads immediately so the site doesn't look broken) -->
-<!-- Master CSS Bundle (Exact original order, fully cached & versioned) -->
-<!-- 1. CRITICAL STRUCTURAL CSS (Loaded natively to guarantee zero layout glitches) -->
+<!-- 1. PRELOAD CORE CSS (Forces the browser to fetch these instantly without blocking) -->
+<link rel="preload" href="{{asset('styles/bootstrap.min.css')}}" as="style">
+<link rel="preload" href="{{asset('styles/style.css')}}" as="style">
+<link rel="preload" href="{{asset('styles/responsive.css')}}" as="style">
+
+<!-- Prevent Layout Shift for Deferred Font Awesome Icons -->
+<style>
+    .header-menu .nav.menu > li > a > i.fa-angle-down {
+        display: inline-block;
+        width: 12px; 
+        margin-left: 5px;
+    }
+</style>
+
+<!-- 2. CRITICAL STRUCTURAL CSS (Loaded natively to guarantee zero layout glitches) -->
 <link rel="stylesheet" href="{{asset('styles/bootstrap.min.css')}}">
-<link rel="stylesheet" href="{{asset('styles/font-awesome.min.css')}}">
 <link rel="stylesheet" href="{{asset('styles/slicknav.min.css')}}">
 <link rel="stylesheet" href="{{asset('styles/normalize.css')}}">
 <link rel="stylesheet" href="{{asset('styles/style.css')}}">
 <link rel="stylesheet" href="{{asset('styles/responsive.css')}}">
 
-<!-- 2. DEFERRED PLUGIN CSS (Safe to load in background to boost PageSpeed) -->
+<!-- 3. DEFERRED PLUGIN CSS (Safe to load in background to boost PageSpeed) -->
+<link rel="stylesheet" href="{{asset('styles/font-awesome.min.css')}}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{asset('styles/jquery.fancybox.min.css')}}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{asset('styles/owl.carousel.min.css')}}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{asset('styles/owl.theme.default.min.css')}}" media="print" onload="this.media='all'">
@@ -45,8 +58,9 @@
 <link rel="stylesheet" href="{{asset('styles/magnific-popup.css')}}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{asset('styles/toastr.css')}}" media="print" onload="this.media='all'">
 
-<!-- 3. FALLBACK (In case a user has JavaScript disabled) -->
+<!-- 4. FALLBACK (In case a user has JavaScript disabled) -->
 <noscript>
+    <link rel="stylesheet" href="{{asset('styles/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('styles/jquery.fancybox.min.css')}}">
     <link rel="stylesheet" href="{{asset('styles/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('styles/owl.theme.default.min.css')}}">
@@ -476,28 +490,28 @@
 
 <!-- JS Dependencies (Deferred for Performance) -->
 <!-- JS Dependencies (Moved to footer for performance, executing normally) -->
+<!-- JS Dependencies (Deferred for Performance) -->
 <script src="{{asset('jquery/jquery.min.js')}}"></script>
-<script src='https://www.google.com/recaptcha/api.js'></script>
-<script src="{{asset('jquery/toastr.min.js')}}"></script>
-<script src="{{asset('jquery/quick_enquiry.js')}}"></script>
 <script src="{{asset('jquery/jquery-migrate.min.js')}}"></script>
-<script src="{{asset('jquery/popper.min.js')}}"></script>
 <script src="{{asset('jquery/bootstrap.min.js')}}"></script> 
-<script src="{{asset('jquery/jquery.stellar.min.js')}}"></script>
-<script src="{{asset('jquery/particles.min.js')}}"></script>
-<script src="{{asset('jquery/facnybox.min.js')}}"></script>
-<script src="{{asset('jquery/jquery.magnific-popup.min.js')}}"></script>
-<script src="{{asset('jquery/masonry.pkgd.min.js')}}"></script>
-<script src="{{asset('jquery/circle-progress.min.js')}}"></script>
 <script src="{{asset('jquery/owl.carousel.min.js')}}"></script>
-<script src="{{asset('jquery/waypoints.min.js')}}"></script>
-<script src="{{asset('jquery/slicknav.min.js')}}"></script>
-<script src="{{asset('jquery/jquery.counterup.min.js')}}"></script>
-<script src="{{asset('jquery/easing.min.js')}}"></script>
-<script src="{{asset('jquery/wow.min.js')}}"></script>
-<script src="{{asset('jquery/jquery.scrollUp.min.js')}}"></script>
 <script src="{{asset('jquery/main.js')}}"></script>
-
+<script src='https://www.google.com/recaptcha/api.js' defer></script>
+<script src="{{asset('jquery/toastr.min.js')}}" defer></script>
+<script src="{{asset('jquery/quick_enquiry.js')}}" defer></script>
+<script src="{{asset('jquery/popper.min.js')}}" defer></script>
+<script src="{{asset('jquery/jquery.stellar.min.js')}}" defer></script>
+<script src="{{asset('jquery/particles.min.js')}}" defer></script>
+<script src="{{asset('jquery/facnybox.min.js')}}" defer></script>
+<script src="{{asset('jquery/jquery.magnific-popup.min.js')}}" defer></script>
+<script src="{{asset('jquery/masonry.pkgd.min.js')}}" defer></script>
+<script src="{{asset('jquery/circle-progress.min.js')}}" defer></script>
+<script src="{{asset('jquery/waypoints.min.js')}}" defer></script>
+<script src="{{asset('jquery/slicknav.min.js')}}" defer></script>
+<script src="{{asset('jquery/jquery.counterup.min.js')}}" defer></script>
+<script src="{{asset('jquery/easing.min.js')}}" defer></script>
+<script src="{{asset('jquery/wow.min.js')}}" defer></script>
+<script src="{{asset('jquery/jquery.scrollUp.min.js')}}" defer></script>
 
 <script>
     var searchForm = document.getElementById('search-form');
