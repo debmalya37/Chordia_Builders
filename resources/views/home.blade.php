@@ -8,7 +8,18 @@
 <div class="slider-active">
 @foreach($banners as $banner)
 <div class="single-slider"> 
-    <img src="<?= (isset($banner->image))?asset("banner_images/$banner->image"):''; ?>" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth"> 
+    @if(isset($banner->image))
+        @php
+            // Extracts the base filename (e.g., 'slide1' from 'slide1.jpg')
+            $filename = pathinfo($banner->image, PATHINFO_FILENAME);
+        @endphp
+        <picture>
+            <!-- Modern Browsers: WebP -->
+            <source srcset="{{ asset("banner_images/webp/{$filename}.webp") }}" type="image/webp">
+            <!-- Fallback: JPG/PNG -->
+            <img src="{{ asset("banner_images/{$banner->image}") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth">
+        </picture>
+    @endif
 </div> 
 @endforeach
 </div>
@@ -40,31 +51,51 @@
 <div class="homest">
     <div class="container">
         <div class="row">
-            <!-- 3. Added loading="lazy" to below-the-fold images -->
+            <!-- 3. Added loading="lazy" to below-the-fold images and converted to picture -->
             <div class="col-md-3 col-6">
                 <div class="stbox">
-                    <div class="icon"> <img src="{{asset('images/static01.png')}}" width="55" height="55" alt="Projects Delivered" loading="lazy" /> </div>
+                    <div class="icon"> 
+                        <picture>
+                            <source srcset="{{asset('images/webp/static01.webp')}}" type="image/webp">
+                            <img src="{{asset('images/static01.png')}}" width="55" height="55" alt="Projects Delivered" loading="lazy" /> 
+                        </picture>
+                    </div>
                     <div class="num"> 9 </div>
                     <div class="heading"> Projects Delivered </div>
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="stbox">
-                    <div class="icon"> <img src="{{asset('images/static02.png')}}" width="55" height="55" alt="Happy Families" loading="lazy" /> </div>
+                    <div class="icon"> 
+                        <picture>
+                            <source srcset="{{asset('images/webp/static02.webp')}}" type="image/webp">
+                            <img src="{{asset('images/static02.png')}}" width="55" height="55" alt="Happy Families" loading="lazy" /> 
+                        </picture>
+                    </div>
                     <div class="num"> 2500+ </div>
                     <div class="heading"> Happy Families </div>
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="stbox">
-                    <div class="icon"> <img src="{{asset('images/static03.png')}}" width="55" height="55" alt="Area Delivered" loading="lazy" /> </div>
+                    <div class="icon"> 
+                        <picture>
+                            <source srcset="{{asset('images/webp/static03.webp')}}" type="image/webp">
+                            <img src="{{asset('images/static03.png')}}" width="55" height="55" alt="Area Delivered" loading="lazy" /> 
+                        </picture>
+                    </div>
                     <div class="num"> 35 </div>
                     <div class="heading"> lac (approx.) sq. ft. of area already delivered </div>
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="stbox active">
-                    <div class="icon"> <img src="{{asset('images/static04.png')}}" width="55" height="55" alt="Area to be Delivered" loading="lazy" /> </div>
+                    <div class="icon"> 
+                        <picture>
+                            <source srcset="{{asset('images/webp/static04.webp')}}" type="image/webp">
+                            <img src="{{asset('images/static04.png')}}" width="55" height="55" alt="Area to be Delivered" loading="lazy" /> 
+                        </picture>
+                    </div>
                     <div class="num"> 10 </div>
                     <div class="heading heading-white"> lac (approx.) sq. mt. more of area to be delivered by 2025 </div>
                 </div>
@@ -73,17 +104,27 @@
     </div>
 </div> 
 
- 
-
 @if(!$recommended->isEmpty())
 <section class="section ourproject">
     <div class="container">
         <h2>Ongoing Project</h2>
-        @php($i=1)
-         @foreach($recommended as $nproject)
+        @php $i = 1; @endphp
+        @foreach($recommended as $nproject)
             <div class="homeproject">
-                <div class="row {{$i%2==0?'flex-row-reverse':''}}">
-                    <div class="col-md-7"> <img src="<?= (isset($nproject->image))?asset("project_images/$nproject->image"):asset('') ?>" width="855" height="582" alt="{{$nproject->alttag}}" class="img-fullwidth" loading="lazy" /> </div>
+                <div class="row {{$i % 2 == 0 ? 'flex-row-reverse' : ''}}">
+                    <div class="col-md-7"> 
+                        @if(isset($nproject->image))
+                            @php
+                                $proj_filename = pathinfo($nproject->image, PATHINFO_FILENAME);
+                            @endphp
+                            <picture>
+                                <source srcset="{{ asset("project_images/webp/{$proj_filename}.webp") }}" type="image/webp">
+                                <img src="{{ asset("project_images/{$nproject->image}") }}" width="855" height="582" alt="{{$nproject->alttag}}" class="img-fullwidth" loading="lazy" />
+                            </picture>
+                        @else
+                            <img src="{{ asset('') }}" width="855" height="582" alt="{{$nproject->alttag}}" class="img-fullwidth" loading="lazy" />
+                        @endif
+                    </div>
                     <div class="col-md-5">
                         <div class="prtext">
                             <div class="dabba">
@@ -98,13 +139,11 @@
                     </div>
                 </div>
             </div> 
-            @php($i++)
-            @endforeach
+            @php $i++; @endphp
+        @endforeach
     </div>
-</section> @endif
-
- 
-
+</section> 
+@endif
 
 <section class="section dpradvantage">
 <div class="container">
@@ -193,16 +232,16 @@
 </div>
 </section>
 
-
-
-
 <section class="section home-career">
 <div class="container"> 
 <h2>Why Chordia Builders?</h2>  
 <div class="expactivities">
 <div class="row">
 <div class="col-md-7">
-<img src="{{asset('images/why-us.jpg')}}" alt="Residential projects in Jaipur by Chordia Builders" width="855" height="582" class="img-fullwidth" loading="lazy" />
+<picture>
+    <source srcset="{{asset('images/webp/why-us.webp')}}" type="image/webp">
+    <img src="{{asset('images/why-us.jpg')}}" alt="Residential projects in Jaipur by Chordia Builders" width="855" height="582" class="img-fullwidth" loading="lazy" />
+</picture>
 </div>
 <div class="col-md-5">
 <div class="eatext">
@@ -216,7 +255,6 @@ Our reputation for delivering a luxury apartment in Jaipur at affordable prices 
 We also provide full legal transparency, RERA compliance, and dedicated customer support to make your home-buying experience smooth and stress-free.
 
 Join hundreds of happy families who have made Chordia Builders their trusted choice. Whether you're a first-time homebuyer or looking to upgrade your lifestyle, we’re here to help you find the perfect place to call home.</p>
-
 </div>
 </div>
 </div>
@@ -224,7 +262,6 @@ Join hundreds of happy families who have made Chordia Builders their trusted cho
 </div>
 </div>
 </section>
- 
 
 <section class="section media">
 <div class="container"> 
@@ -289,10 +326,10 @@ Join hundreds of happy families who have made Chordia Builders their trusted cho
 </form>
 </div>   
 </div>  
-</div><!-- Note: Fixed an unclosed div here -->   
+</div>
 </section>
 
- @if(!$testimonials->isEmpty())
+@if(!$testimonials->isEmpty())
 <section class="testimonial section">
 <div class="container">
 <h2>Customers Speak</h2> 
@@ -303,8 +340,13 @@ Join hundreds of happy families who have made Chordia Builders their trusted cho
 <p>{!! $testimonial->description !!}</p>    
 </div>
 <div class="main-footer">
-<!-- 6. Fixed missing alt text on testimonial images -->
-<div class="testiimg"><img src="{{asset('images/testimonial1.jpg')}}" width="200" height="200" alt="Testimonial from {{$testimonial->title}}" loading="lazy"></div>    
+<!-- 6. Fixed missing alt text on testimonial images and converted to picture -->
+<div class="testiimg">
+    <picture>
+        <source srcset="{{asset('images/webp/testimonial1.webp')}}" type="image/webp">
+        <img src="{{asset('images/testimonial1.jpg')}}" width="200" height="200" alt="Testimonial from {{$testimonial->title}}" loading="lazy">
+    </picture>
+</div>    
 <div class="testicite">
 <div class="testimonial__name">{{$testimonial->title}} </div>
 <div class="testimonial__title">{{$testimonial->designation}} </div>
