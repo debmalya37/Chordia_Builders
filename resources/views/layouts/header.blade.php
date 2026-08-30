@@ -491,9 +491,9 @@
 
 
 <!-- Replace the global recaptcha script with this conditional block -->
-@if(request()->is('/') || request()->is('contact-us'))
+<!-- @if(request()->is('/') || request()->is('contact-us'))
 <script src='https://www.google.com/recaptcha/api.js' async defer></script>
-@endif
+@endif -->
 <!-- JS Dependencies (Deferred for Performance) -->
 <!-- JS Dependencies (Moved to footer for performance, executing normally) -->
 <!-- JS Dependencies (Deferred for Performance) -->
@@ -556,6 +556,23 @@ function myFunction() {
         }
     }
 } 
+</script>
+<script>
+    // Lazy-load Google reCAPTCHA only when a user interacts with the page/forms
+    let recaptchaLoaded = false;
+    function loadRecaptcha() {
+        if (!recaptchaLoaded) {
+            recaptchaLoaded = true;
+            let script = document.createElement('script');
+            script.src = 'https://www.google.com/recaptcha/api.js';
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
+        }
+    }
+    window.addEventListener('scroll', loadRecaptcha, {once: true});
+    window.addEventListener('mousemove', loadRecaptcha, {once: true});
+    window.addEventListener('touchstart', loadRecaptcha, {once: true});
 </script>
 </body>
 
