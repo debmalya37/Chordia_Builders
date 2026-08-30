@@ -1372,6 +1372,35 @@ a.whatsapp-btn:hover {
 	font-size:16px;
 	font-weight:600;
 } 
+/* ==========================================================
+   PERFORMANCE & LAYOUT FIXES FOR CHORDIA BUILDERS
+   ========================================================== */
+
+/* 1. Stabilize container heights to completely eliminate Cumulative Layout Shift (CLS) */
+.home-slider {
+    min-height: 500px;
+}
+
+.about-chordia {
+    min-height: 350px;
+}
+
+.ourproject {
+    min-height: 600px;
+}
+
+/* 2. Optimize Font Awesome loading to prevent icon-snapping / text shifts */
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2');
+    font-display: swap;
+}
+
+/* 3. Fix right-panel icon layout constraints to prevent dimension mismatch warnings */
+.right-panel ul li a span img {
+    max-width: 28px;
+    height: auto;
+}
 
 .about-kosmos .button{margin-top:20px}
 .about-kosmos .btn{color:#fff;font-size:14px;letter-spacing:1px;padding:10px 20px;text-transform:uppercase;background:#0b182d;border:#0b182d 1px solid}

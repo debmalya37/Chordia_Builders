@@ -466,7 +466,7 @@
 <a   data-toggle="modal" data-target=".pop-up-1">
 <b>Enquire&nbsp;Now</b>
 <span>
-<img src="{{asset('images/header-nav-email-2.png')}}" style="max-width: 28px;" width="40" height="40" alt="Enquire Now">
+<img src="{{asset('images/header-nav-email-2.png')}}" style="max-width: 28px;" width="28" height="28" alt="Enquire Now">
 </span>
 </a>
 </li>
@@ -490,6 +490,10 @@
 {!! GeneralHelper::Generals()->chat_widget !!}
 
 
+<!-- Replace the global recaptcha script with this conditional block -->
+@if(request()->is('/') || request()->is('contact-us'))
+<script src='https://www.google.com/recaptcha/api.js' async defer></script>
+@endif
 <!-- JS Dependencies (Deferred for Performance) -->
 <!-- JS Dependencies (Moved to footer for performance, executing normally) -->
 <!-- JS Dependencies (Deferred for Performance) -->
@@ -498,7 +502,6 @@
 <script src="{{asset('jquery/bootstrap.min.js')}}"></script> 
 <script src="{{asset('jquery/owl.carousel.min.js')}}"></script>
 <script src="{{asset('jquery/main.js')}}"></script>
-<script src='https://www.google.com/recaptcha/api.js' defer></script>
 <script src="{{asset('jquery/toastr.min.js')}}" defer></script>
 <script src="{{asset('jquery/quick_enquiry.js')}}" defer></script>
 <script src="{{asset('jquery/popper.min.js')}}" defer></script>
