@@ -1409,3 +1409,16 @@ a.whatsapp-btn:hover {
 .mrg-lft-0{
     margin-left: -1px !important;
 }
+
+/* Force immediate slider container layout sizing to kill the final CLS */
+.home-slider, .slider-active, .single-slider {
+    min-height: 525px !important;
+    max-height: 725px !important;
+    background-color: #0b182d; /* Prevents white flashing while image loads */
+}
+
+.home-slider img {
+    object-fit: cover;
+    height: auto;
+    min-height: 525px;
+}
