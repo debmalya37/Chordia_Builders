@@ -1439,21 +1439,21 @@ a.whatsapp-btn:hover {
     object-fit: cover;
     object-position: center top; /* Centers horizontally, anchors to top so nothing gets cut off */
     display: block;
-    padding-top: 15px; /* Adds breathing room at the top */
+    padding-top: 0px; /* Adds breathing room at the top */
 }
 
 /* Responsive adjustments */
 @media (max-width: 991px) {
     .home-slider .single-slider img.banner-img {
         max-height: 400px;
-        padding-top: 10px;
+        padding-top: 0px;
     }
 }
 
 @media (max-width: 575px) {
     .home-slider .single-slider img.banner-img {
         max-height: 240px;
-        padding-top: 5px;
+        padding-top: 0px;
     }
 }
 
