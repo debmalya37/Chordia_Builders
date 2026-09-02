@@ -1410,7 +1410,7 @@ a.whatsapp-btn:hover {
     margin-left: -1px !important;
 }
 /* ==========================================================
-   PERFECT BANNER FIX: COVER WITH AUTO-HEIGHT MOBILE COLLAPSE
+   PERFECT FIT: CONTAIN TO PREVENT ANY TOP/BOTTOM CROPPING
    ========================================================== */
 
 /* Force header to remain in document flow */
@@ -1430,15 +1430,15 @@ a.whatsapp-btn:hover {
     background-color: #0b182d;
 }
 
-/* Desktop sizing: Keep object-fit: cover for edge-to-edge look */
+/* Use object-fit: contain so the whole banner graphic displays completely without clipping */
 .home-slider .single-slider img.banner-img {
     width: 100%;
     height: auto;
-    max-height: 725px;
-    object-fit: cover;
-    object-position: center top; 
+    max-height: none;
+    object-fit: contain;
+    object-position: center center;
     display: block;
-    padding-top: 0px; 
+    margin: 0 auto;
 }
 
 /* Tablet adjustments */
@@ -1455,12 +1455,11 @@ a.whatsapp-btn:hover {
         width: 100% !important;
         height: auto !important;
         max-height: none !important;
-        object-fit: cover;
-        padding-top: 0px;
+        object-fit: contain;
     }
 }
 
-/* Mobile adjustments to collapse container height and eliminate blank gap */
+/* Mobile adjustments */
 @media (max-width: 575px) {
     .home-slider, 
     .home-slider .slider-active, 
@@ -1474,8 +1473,7 @@ a.whatsapp-btn:hover {
         width: 100% !important;
         height: auto !important;
         max-height: none !important;
-        object-fit: cover;
-        padding-top: 0px;
+        object-fit: contain;
     }
 }
 
