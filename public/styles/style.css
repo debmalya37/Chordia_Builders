@@ -1410,7 +1410,7 @@ a.whatsapp-btn:hover {
     margin-left: -1px !important;
 }
 /* ==========================================================
-   PERFECT BANNER FIX: COVER WITH SAFE TOP PADDING
+   PERFECT BANNER FIX: COVER WITH AUTO-HEIGHT MOBILE COLLAPSE
    ========================================================== */
 
 /* Force header to remain in document flow */
@@ -1430,29 +1430,51 @@ a.whatsapp-btn:hover {
     background-color: #0b182d;
 }
 
-/* Keep object-fit: cover for edge-to-edge look, 
-   plus top padding offset so the top content never gets clipped */
+/* Desktop sizing: Keep object-fit: cover for edge-to-edge look */
 .home-slider .single-slider img.banner-img {
     width: 100%;
     height: auto;
     max-height: 725px;
     object-fit: cover;
-    object-position: center top; /* Centers horizontally, anchors to top so nothing gets cut off */
+    object-position: center top; 
     display: block;
-    padding-top: 0px; /* Adds breathing room at the top */
+    padding-top: 0px; 
 }
 
-/* Responsive adjustments */
+/* Tablet adjustments */
 @media (max-width: 991px) {
+    .home-slider, 
+    .home-slider .slider-active, 
+    .home-slider .single-slider {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+    }
+
     .home-slider .single-slider img.banner-img {
-        max-height: 400px;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        object-fit: cover;
         padding-top: 0px;
     }
 }
 
+/* Mobile adjustments to collapse container height and eliminate blank gap */
 @media (max-width: 575px) {
+    .home-slider, 
+    .home-slider .slider-active, 
+    .home-slider .single-slider {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+    }
+
     .home-slider .single-slider img.banner-img {
-        max-height: 240px;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        object-fit: cover;
         padding-top: 0px;
     }
 }
