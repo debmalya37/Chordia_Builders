@@ -1444,3 +1444,13 @@ a.whatsapp-btn:hover {
         max-height: 250px;
     }
 }
+
+/* Fix homepage header layout so it never creates abnormal height or overlaps */
+.header.home-header {
+    position: relative !important;
+    width: 100%;
+}
+
+.home-slider {
+    margin-top: 0 !important;
+}

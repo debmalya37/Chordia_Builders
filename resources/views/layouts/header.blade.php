@@ -100,15 +100,10 @@
  
 
 @if(request()->is('/'))
-
-@php($class = "")
-
+@php($class = "home-header")
 @else
-
 @php($class = "position-relative")
-
 @endif
-
 <header class="header {{$class}}"> 
 
 <!-- Header Inner -->
