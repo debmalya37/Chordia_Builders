@@ -15,12 +15,10 @@
         @endphp
         
         @if($isFirst)
-            <!-- Single WebP for Desktop & Mobile (Eager loaded for instant LCP) -->
-            <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth" fetchpriority="high">
+            <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth banner-img" fetchpriority="high">
             @php $isFirst = false; @endphp
         @else
-            <!-- Single WebP for subsequent slides (Lazily loaded) -->
-            <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth" loading="lazy">
+            <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth banner-img" loading="lazy">
         @endif
     @endif
 </div>

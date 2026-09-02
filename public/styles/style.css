@@ -1409,29 +1409,38 @@ a.whatsapp-btn:hover {
 .mrg-lft-0{
     margin-left: -1px !important;
 }
-
-/* Force immediate slider container layout sizing to kill the final CLS */
-.home-slider, .slider-active, .single-slider {
-    min-height: 525px !important;
-    max-height: 725px !important;
-    background-color: #0b182d; /* Prevents white flashing while image loads */
+/* ==========================================================
+   FINAL UNIFIED HOME SLIDER STYLING (NO CONFLICTS)
+   ========================================================== */
+.home-slider, 
+.home-slider .slider-active, 
+.home-slider .single-slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 0;
+    background-color: #0b182d; /* Prevents white flashing */
 }
 
-.home-slider img {
-    object-fit: cover;
+/* Forces the image to scale naturally without top-cropping */
+.home-slider .single-slider img.banner-img {
+    width: 100%;
     height: auto;
-    min-height: 525px;
-}
-/* Increase banner height and prevent top/bottom cropping */
-.home-slider, .slider-active, .single-slider {
-    min-height: 600px !important;
-    max-height: none !important; /* Removes the restriction cutting off heights */
-    height: auto !important;
+    max-height: 725px;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
 }
 
-.home-slider img, .home-slider .single-slider img {
-    object-fit: contain !important; /* Switches from cover to contain so the whole image is visible without cropping */
-    width: 100% !important;
-    height: auto !important;
-    min-height: 450px;
+/* Tablet & Mobile height scaling adjustments */
+@media (max-width: 991px) {
+    .home-slider .single-slider img.banner-img {
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 575px) {
+    .home-slider .single-slider img.banner-img {
+        max-height: 250px;
+    }
 }
