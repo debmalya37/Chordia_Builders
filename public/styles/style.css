@@ -1410,29 +1410,41 @@ a.whatsapp-btn:hover {
     margin-left: -1px !important;
 }
 /* ==========================================================
-   FINAL UNIFIED HOME SLIDER STYLING (NO CONFLICTS)
+   FINAL PERFECTION: HOME HEADER & BANNER OVERLAP/CROP FIX
    ========================================================== */
+
+/* 1. Force header to be completely static and safe on the homepage */
+.header.home-header {
+    position: relative !important;
+    width: 100%;
+    float: none;
+    clear: both;
+}
+
+/* 2. Container safety */
 .home-slider, 
 .home-slider .slider-active, 
 .home-slider .single-slider {
     position: relative;
     width: 100%;
     overflow: hidden;
-    margin-top: 0;
-    background-color: #0b182d; /* Prevents white flashing */
+    margin-top: 0 !important;
+    background-color: #0b182d;
 }
 
-/* Forces the image to scale naturally without top-cropping */
+/* 3. Use 'contain' with centered vertical alignment to guarantee 
+   ZERO top/bottom cropping of text or graphics on any screen size */
 .home-slider .single-slider img.banner-img {
     width: 100%;
     height: auto;
     max-height: 725px;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center center;
     display: block;
+    margin: 0 auto;
 }
 
-/* Tablet & Mobile height scaling adjustments */
+/* Responsive scale limits for tablets and mobile devices */
 @media (max-width: 991px) {
     .home-slider .single-slider img.banner-img {
         max-height: 400px;
@@ -1441,16 +1453,6 @@ a.whatsapp-btn:hover {
 
 @media (max-width: 575px) {
     .home-slider .single-slider img.banner-img {
-        max-height: 250px;
+        max-height: 240px;
     }
-}
-
-/* Fix homepage header layout so it never creates abnormal height or overlaps */
-.header.home-header {
-    position: relative !important;
-    width: 100%;
-}
-
-.home-slider {
-    margin-top: 0 !important;
 }
