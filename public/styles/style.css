@@ -1410,18 +1410,16 @@ a.whatsapp-btn:hover {
     margin-left: -1px !important;
 }
 /* ==========================================================
-   FINAL PERFECTION: HOME HEADER & BANNER OVERLAP/CROP FIX
+   PERFECT BANNER FIX: COVER WITH SAFE TOP PADDING
    ========================================================== */
 
-/* 1. Force header to be completely static and safe on the homepage */
+/* Force header to remain in document flow */
 .header.home-header {
     position: relative !important;
     width: 100%;
-    float: none;
-    clear: both;
 }
 
-/* 2. Container safety */
+/* Container safety & spacing */
 .home-slider, 
 .home-slider .slider-active, 
 .home-slider .single-slider {
@@ -1432,27 +1430,29 @@ a.whatsapp-btn:hover {
     background-color: #0b182d;
 }
 
-/* 3. Use 'contain' with centered vertical alignment to guarantee 
-   ZERO top/bottom cropping of text or graphics on any screen size */
+/* Keep object-fit: cover for edge-to-edge look, 
+   plus top padding offset so the top content never gets clipped */
 .home-slider .single-slider img.banner-img {
     width: 100%;
     height: auto;
     max-height: 725px;
-    object-fit: contain;
-    object-position: center center;
+    object-fit: cover;
+    object-position: center top; /* Centers horizontally, anchors to top so nothing gets cut off */
     display: block;
-    margin: 0 auto;
+    padding-top: 15px; /* Adds breathing room at the top */
 }
 
-/* Responsive scale limits for tablets and mobile devices */
+/* Responsive adjustments */
 @media (max-width: 991px) {
     .home-slider .single-slider img.banner-img {
         max-height: 400px;
+        padding-top: 10px;
     }
 }
 
 @media (max-width: 575px) {
     .home-slider .single-slider img.banner-img {
         max-height: 240px;
+        padding-top: 5px;
     }
 }
