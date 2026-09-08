@@ -333,27 +333,16 @@
     
 
     <div class="col-lg-4 col-12">
-
         <!-- Useful Links -->
-
         <div class="single-widget useful-links">
-
             <h2>Location Map</h2>
-
             @if(GeneralHelper::Generals()->gmap)
-
             <iframe class="gmap_iframe" src="{{ GeneralHelper::Generals()->gmap }}" width="100%"></iframe>
-
             @else
-
-            <a href="https://www.google.com/maps/place/Chordia+Group/@26.890943,75.757501,10946m/data=!3m1!1e3!4m6!3m5!1s0x396db45f0c5ebecb:0x67bfd40e77774546!8m2!3d26.8909428!4d75.7575011!16s%2Fg%2F11b7jthg6b?hl=en&entry=ttu&g_ep=EgoyMDI0MTEyNC4xIKXMDSoASAFQAw%3D%3D" target="_blank"> <img src="{{asset('images/map.jpg')}}" width="397" height="154" alt="Google Map" /> </a>
-
+            <a href="https://share.google/TC9AY9w3yopeBAlgG" target="_blank"> <img src="{{asset('images/map.jpg')}}" width="397" height="154" alt="Google Map" /> </a>
             @endif 
-
         </div>
-
         <!--/ End Useful Links -->
-
     </div>
 
     
