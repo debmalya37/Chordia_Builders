@@ -339,7 +339,7 @@
             @if(GeneralHelper::Generals()->gmap)
             <iframe class="gmap_iframe" src="{{ GeneralHelper::Generals()->gmap }}" width="100%"></iframe>
             @else
-            <a href="https://share.google/TC9AY9w3yopeBAlgG" target="_blank"> <img src="{{asset('images/map.jpg')}}" width="397" height="154" alt="Google Map" /> </a>
+            <a href="https://maps.app.goo.gl/miBYohiTrbJu2agz6" target="_blank"> <img src="{{asset('images/map.jpg')}}" width="397" height="154" alt="Google Map" /> </a>
             @endif 
         </div>
         <!--/ End Useful Links -->
