@@ -627,7 +627,7 @@ Pool</p>
 <div class="col-lg-5">
 <div class="call-us">
    <h5><strong>CALL :</strong> +91-9001412645</h5>
-   <h5><strong>Address :</strong> Chordia Enclave, 29, Janpath, Shyam Nagar, Jaipur-302019</h5>
+   <h5><strong>Address :</strong> Shivvilas Realhome Pvt Ltd, Chordia Enclave, 29, Jan Path, Kishan Nagar, Shyam Nagar, Jaipur, Rajasthan 302019</h5>
    <p>For any queries related to our projects please feel free to contact us.</p>
 </div>
 </div>
