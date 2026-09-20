@@ -16,4 +16,14 @@
 @endif
 <link rel="canonical" href="{{url()->current()}}" />
 <meta name="robots" content="all,follow">
+<meta name="google-site-verification" content="_RabCQOUOl8r5XL75sFoRjWMsrz2bC-UvXEX9tNycs0" />
+<!-- Geo Meta Tags -->
+<meta name="geo.region" content="IN-RJ">
+<meta name="geo.placename" content="Jaipur, Rajasthan, India">
+<meta name="geo.position" content="26.8851;75.7895">
+<meta name="ICBM" content="26.8851, 75.7895">
 
+<meta name="location" content="Jaipur, Rajasthan, India">
+<meta name="distribution" content="Global">
+<meta name="coverage" content="Jaipur, Rajasthan, India">
+<meta name="target" content="Luxury Home Buyers, Property Investors, NRIs">

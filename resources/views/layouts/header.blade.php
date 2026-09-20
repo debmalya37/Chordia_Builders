@@ -70,21 +70,27 @@
     <link rel="stylesheet" href="{{asset('styles/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('styles/toastr.css')}}">
 </noscript>
+
 <!-- Delayed Google tag (gtag.js) & Events to improve Initial Page Load -->
 <script type="text/javascript">
     window.addEventListener('load', function() {
         setTimeout(function() {
             var script = document.createElement('script');
-            script.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17559730445';
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-0K8VC930RS';
             script.async = true;
             document.head.appendChild(script);
 
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+
+            /* Google Analytics 4 */
+            gtag('config', 'G-0K8VC930RS');
+
+            /* Google Ads */
             gtag('config', 'AW-17559730445');
             gtag('event', 'conversion', {'send_to': 'AW-17559730445/z5lHCMvWj8IbEI3ykLVB'});
-        }, 3500); // Delays execution by 3.5 seconds so visuals load instantly
+        }, 3500);
     });
 </script>
 
