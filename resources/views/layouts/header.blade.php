@@ -72,6 +72,7 @@
 </noscript>
 
 <!-- Delayed Google tag (gtag.js) & Events to improve Initial Page Load -->
+<!-- Delayed Google tag (gtag.js) & Events to improve Initial Page Load -->
 <script type="text/javascript">
     window.addEventListener('load', function() {
         setTimeout(function() {
@@ -87,9 +88,8 @@
             /* Google Analytics 4 */
             gtag('config', 'G-0K8VC930RS');
 
-            /* Google Ads */
+            /* Google Ads Base Config ONLY (No conversion event here) */
             gtag('config', 'AW-17559730445');
-            gtag('event', 'conversion', {'send_to': 'AW-17559730445/z5lHCMvWj8IbEI3ykLVB'});
         }, 3500);
     });
 </script>

@@ -2,7 +2,21 @@ function rootpath() {
   var root = '/'
   return root
 }
+
+// Global conversion trigger helper
+function triggerGoogleAdsConversion() {
+  if (typeof gtag === 'function') {
+    gtag('event', 'conversion', {
+      'send_to': 'AW-17559730445/z5lHCMvWj8IbEI3ykLVB',
+      'value': 1.0,
+      'currency': 'INR'
+    })
+    console.log('Google Ads lead conversion fired successfully.')
+  }
+}
+
 $(document).ready(function () {
+  // 1. Quick Inquiry Form (Used across pages and in new-project.blade.php)
   $('#quickid').on('submit', function (e) {
     e.preventDefault()
     $.ajax({
@@ -23,17 +37,21 @@ $(document).ready(function () {
       },
       success: function (data) {
         if (data.status == 0) {
+          // Validation failed: NO conversion hit
           $.each(data.error, function (prefix, val) {
             $('span.' + prefix + '_error').text(val[0])
           })
         } else {
+          // Success: Show toastr, reset form, and FIRE CONVERSION HIT
           toastr.success(data.msg)
           $('#quickid')[0].reset()
+          triggerGoogleAdsConversion()
         }
       },
     })
   })
 
+  // 2. Contact Page Form
   $('#contactid').on('submit', function (e) {
     e.preventDefault()
     $.ajax({
@@ -54,11 +72,13 @@ $(document).ready(function () {
         } else {
           $('#contactid')[0].reset()
           alert(data.msg)
+          triggerGoogleAdsConversion()
         }
       },
     })
   })
 
+  // 3. Tour Booking Form
   $('#tourid').on('submit', function (e) {
     e.preventDefault()
     $.ajax({
@@ -79,11 +99,13 @@ $(document).ready(function () {
         } else {
           $('#tourid')[0].reset()
           alert(data.msg)
+          triggerGoogleAdsConversion()
         }
       },
     })
   })
 
+  // 4. Payment Form
   $('#paymentid').on('submit', function (e) {
     e.preventDefault()
     var callback = $(this).attr('class')
@@ -111,14 +133,15 @@ $(document).ready(function () {
         } else {
           toastr.success(data.msg)
           $('#paymentid')[0].reset()
+          triggerGoogleAdsConversion()
           location.href = rootpath() + callback
         }
       },
     })
   })
-  
-  
-   $('#modelid').on('submit', function (e) {
+
+  // 5. Popup Modal Form
+  $('#modelid').on('submit', function (e) {
     e.preventDefault()
     $.ajax({
       url: $(this).attr('action'),
@@ -144,6 +167,7 @@ $(document).ready(function () {
         } else {
           toastr.success(data.msg)
           $('#modelid')[0].reset()
+          triggerGoogleAdsConversion()
         }
       },
     })
