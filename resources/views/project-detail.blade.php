@@ -4,14 +4,71 @@
 
 @if($info->cat_id=='2')
 @if(sizeof($info->projectimages))
-<section class="home-slider">
-<div class="slider-active">
-<!-- Single Slider -->
-@foreach($info->projectimages as $mimgs)
-<div class="single-slider"> <img src="<?= (isset($mimgs->image))?asset("project_more_images/$mimgs->image"):''; ?>" alt="{{$mimgs->alt_tag}}" class="img-fullwidth"> </div> 
-@endforeach
-<!--/ End Single Slider -->
-</div>
+<section class="home-slider-wrapper">
+    <div class="home-slider">
+        <div class="slider-active">
+            @foreach($info->projectimages as $mimgs)
+            <div class="single-slider"> 
+                <img src="<?= (isset($mimgs->image))?asset("project_more_images/$mimgs->image"):''; ?>" alt="{{$mimgs->alt_tag}}" class="img-fullwidth banner-img"> 
+            </div> 
+            @endforeach
+        </div>
+    </div>
+
+    <!-- Floating Form on Top-Right of Slider for Eraya -->
+    <div class="banner-form-container">
+        <div class="banner-lead-glass-card">
+            <h3>Book a Private Site Visit</h3>
+            <p class="subtitle">Experience {{ $info->title }} in person</p>
+
+            <form method="POST" autocomplete="off" class="form ajax-glass-form" action="{{ route('common.send') }}">
+                @csrf
+                <input type="hidden" name="page_url" value="{{ url()->current() }}">
+                <input type="hidden" name="project_name" value="{{ $info->title }}">
+
+                <!-- 1. Residence Preference -->
+                <div class="form-group">
+                    <label for="eraya_residence">Which residence are you interested in?</label>
+                    <select name="residence_type" id="eraya_residence" required class="glass-input">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="2 BHK">2 BHK</option>
+                        <option value="3 BHK">3 BHK</option>
+                        <option value="4 BHK">4 BHK</option>
+                        <option value="Not sure yet">Not sure yet</option>
+                    </select>
+                </div>
+
+                <!-- 2. Requirements / Notes -->
+                <div class="form-group">
+                    <label for="eraya_notes">Requirements or questions?</label>
+                    <textarea name="messages" id="eraya_notes" rows="2" class="glass-input" placeholder="e.g. Floor choice, vastu, budget..."></textarea>
+                </div>
+
+                <!-- 3. Contact Info -->
+                <div class="form-group">
+                    <input type="text" name="name" class="glass-input" placeholder="Full Name *" required>
+                    <span class="text-danger small error-text name_error"></span>
+                </div>
+
+                <div class="row no-gutters">
+                    <div class="col-6 pr-1">
+                        <div class="form-group">
+                            <input type="email" name="email" class="glass-input" placeholder="Email Address *" required>
+                            <span class="text-danger small error-text email_error"></span>
+                        </div>
+                    </div>
+                    <div class="col-6 pl-1">
+                        <div class="form-group">
+                            <input type="tel" name="phone" class="glass-input" placeholder="Phone Number *" pattern="[0-9]{10}" title="10-digit mobile number" required>
+                            <span class="text-danger small error-text phone_error"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-glass-submit">Schedule Visit</button>
+            </form>
+        </div>
+    </div>
 </section>
 @endif
 @elseif($info->banner)

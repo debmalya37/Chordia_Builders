@@ -3,27 +3,84 @@
 @section('content')
 
 <!-- 1. Eager loaded banner for fast LCP -->
+<!-- 1. Eager loaded banner for fast LCP with Floating Site Visit Form -->
 @if(!$banners->isEmpty())
-<section class="home-slider">
-<div class="slider-active">
-@php $isFirst = true; @endphp
-@foreach($banners as $banner)
-<div class="single-slider"> 
-    @if(isset($banner->image))
-        @php
-            $filename = pathinfo($banner->image, PATHINFO_FILENAME);
-        @endphp
-        
-        @if($isFirst)
-            <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth banner-img" fetchpriority="high">
-            @php $isFirst = false; @endphp
-        @else
-            <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth banner-img" loading="lazy">
-        @endif
-    @endif
-</div>
-@endforeach
-</div>
+<section class="home-slider-wrapper">
+    <div class="home-slider">
+        <div class="slider-active">
+            @php $isFirst = true; @endphp
+            @foreach($banners as $banner)
+            <div class="single-slider"> 
+                @if(isset($banner->image))
+                    @php
+                        $filename = pathinfo($banner->image, PATHINFO_FILENAME);
+                    @endphp
+                    
+                    @if($isFirst)
+                        <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth banner-img" fetchpriority="high">
+                        @php $isFirst = false; @endphp
+                    @else
+                        <img src="{{ asset("banner_images/webp/{$filename}.webp") }}" alt="{{$banner->alt_tag}}" width="1500" height="725" class="img-fullwidth banner-img" loading="lazy">
+                    @endif
+                @endif
+            </div>
+            @endforeach
+        </div>
+    </div>
+
+    <!-- Floating Glassmorphism Booking Form Overlay -->
+    <div class="banner-form-container">
+        <div class="banner-lead-glass-card">
+            <h3>Book a Private Site Visit</h3>
+            <p class="subtitle">Experience luxury residences in person</p>
+
+            <form method="POST" autocomplete="off" class="form ajax-glass-form" action="{{ route('common.send') }}">
+                @csrf
+                <input type="hidden" name="page_url" value="{{ url()->current() }}">
+
+                <!-- 1. Residence Preference -->
+                <div class="form-group">
+                    <label for="home_residence">Which residence are you interested in?</label>
+                    <select name="residence_type" id="home_residence" required class="glass-input">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="2 BHK">2 BHK</option>
+                        <option value="3 BHK">3 BHK</option>
+                        <option value="4 BHK">4 BHK</option>
+                        <option value="Not sure yet">Not sure yet</option>
+                    </select>
+                </div>
+
+                <!-- 2. Specific Requirements -->
+                <div class="form-group">
+                    <label for="home_requirements">Requirements or questions?</label>
+                    <textarea name="messages" id="home_requirements" rows="2" class="glass-input" placeholder="e.g. Preferred floor, budget, possession timeline..."></textarea>
+                </div>
+
+                <!-- 3. Contact Info -->
+                <div class="form-group">
+                    <input type="text" name="name" class="glass-input" placeholder="Full Name *" required>
+                    <span class="text-danger small error-text name_error"></span>
+                </div>
+
+                <div class="row no-gutters">
+                    <div class="col-6 pr-1">
+                        <div class="form-group">
+                            <input type="email" name="email" class="glass-input" placeholder="Email Address *" required>
+                            <span class="text-danger small error-text email_error"></span>
+                        </div>
+                    </div>
+                    <div class="col-6 pl-1">
+                        <div class="form-group">
+                            <input type="tel" name="phone" class="glass-input" placeholder="Phone Number *" pattern="[0-9]{10}" title="10-digit mobile number" required>
+                            <span class="text-danger small error-text phone_error"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-glass-submit">Request Site Visit</button>
+            </form>
+        </div>
+    </div>
 </section>
 @endif
 

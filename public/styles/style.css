@@ -1480,3 +1480,130 @@ a.whatsapp-btn:hover {
 .home-header {
     margin-bottom: 5px !important;
 }
+
+/* ==========================================================
+   FLOATING GLASSMORPHISM SLIDER FORMS (HOME & ERAYA)
+   ========================================================== */
+.home-slider-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Position floating form on the right side over the slider */
+.banner-form-container {
+    position: absolute;
+    top: 50%;
+    right: 4%;
+    transform: translateY(-50%);
+    z-index: 25;
+    max-width: 420px;
+    width: 90%;
+}
+
+/* Glassmorphism card styling */
+.banner-lead-glass-card {
+    background: rgba(11, 24, 45, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 24px 26px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    color: #fff;
+}
+
+.banner-lead-glass-card h3 {
+    font-size: 22px;
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    margin: 0 0 4px 0;
+    text-transform: capitalize;
+}
+
+.banner-lead-glass-card .subtitle {
+    font-size: 13px;
+    color: #d8a462;
+    margin-bottom: 15px;
+}
+
+.banner-lead-glass-card label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #dcdcdc;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.banner-lead-glass-card .form-group {
+    margin-bottom: 12px;
+    position: relative;
+}
+
+/* Glass Inputs */
+.banner-lead-glass-card .glass-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    padding: 9px 12px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.banner-lead-glass-card .glass-input::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.banner-lead-glass-card .glass-input:focus {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: #d8a462;
+}
+
+.banner-lead-glass-card select.glass-input option {
+    background: #0b182d;
+    color: #fff;
+}
+
+/* Submit Button */
+.btn-glass-submit {
+    width: 100%;
+    background: linear-gradient(135deg, #d8a462 0%, #b8860b 100%);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 6px;
+}
+
+.btn-glass-submit:hover {
+    background: linear-gradient(135deg, #b8860b 0%, #996515 100%);
+    box-shadow: 0 4px 15px rgba(216, 164, 98, 0.45);
+}
+
+/* Mobile & Tablet responsiveness */
+@media (max-width: 991px) {
+    .banner-form-container {
+        position: relative;
+        top: 0;
+        right: 0;
+        transform: none;
+        max-width: 100%;
+        width: 100%;
+        margin-top: 15px;
+        padding: 0 15px;
+    }
+    .banner-lead-glass-card {
+        background: #0b182d;
+        backdrop-filter: none;
+    }
+}

@@ -140,6 +140,45 @@ $(document).ready(function () {
     })
   })
 
+  // Handle Floating Glassmorphism Slider Forms (Home & Project Details)
+  $('.ajax-glass-form').on('submit', function (e) {
+    e.preventDefault()
+    var $form = $(this)
+    var $btn = $form.find('button[type="submit"]')
+
+    $.ajax({
+      url: $form.attr('action'),
+      method: $form.attr('method'),
+      data: new FormData(this),
+      processData: false,
+      dataType: 'json',
+      contentType: false,
+      beforeSend: function () {
+        $form.find('span.error-text').text('')
+        $btn.prop('disabled', true).text('Submitting...')
+      },
+      complete: function () {
+        $btn.prop('disabled', false).text('Request Site Visit')
+      },
+      success: function (data) {
+        if (data.status == 0) {
+          // Validation error: Show error texts, NO conversion
+          $.each(data.error, function (prefix, val) {
+            $form.find('span.' + prefix + '_error').text(val[0])
+          })
+        } else {
+          // Success: Show toast, reset form, and fire Google Ads conversion
+          toastr.success(data.msg || 'Thank you! We will get in touch shortly.')
+          $form[0].reset()
+          triggerGoogleAdsConversion()
+        }
+      },
+      error: function () {
+        toastr.error('Something went wrong. Please try again.')
+      }
+    })
+  })
+
   // 5. Popup Modal Form
   $('#modelid').on('submit', function (e) {
     e.preventDefault()
