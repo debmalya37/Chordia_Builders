@@ -4,7 +4,10 @@ function rootpath() {
 }
 
 // Global conversion trigger helper
-function triggerGoogleAdsConversion() {
+function triggerGoogleAdsConversion(formElement) {
+  var formAction = formElement ? $(formElement).attr('action') : window.location.href
+
+  // 1. Send Google Ads Lead Conversion Hit
   if (typeof gtag === 'function') {
     gtag('event', 'conversion', {
       'send_to': 'AW-17559730445/z5lHCMvWj8IbEI3ykLVB',
@@ -13,148 +16,187 @@ function triggerGoogleAdsConversion() {
     })
     console.log('Google Ads lead conversion fired successfully.')
   }
+
+  // 2. Push explicit submit event to dataLayer for Google Tag Assistant
+  window.dataLayer = window.dataLayer || []
+  window.dataLayer.push({
+    'event': 'lead_form_submitted',
+    'form_destination': formAction
+  })
 }
 
 $(document).ready(function () {
-  // 1. Quick Inquiry Form (Used across pages and in new-project.blade.php)
-  $('#quickid').on('submit', function (e) {
+  // 1. Quick Inquiry Form (Targets the FORM tag specifically so button ID collision is avoided)
+  $(document).on('submit', 'form#quickid', function (e) {
     e.preventDefault()
+    var form = this
+    var $submitBtn = $(form).find('button[type="submit"], input[type="submit"]')
+
     $.ajax({
-      url: $(this).attr('action'),
-      method: $(this).attr('method'),
-      data: new FormData(this),
+      url: $(form).attr('action'),
+      method: $(form).attr('method') || 'POST',
+      data: new FormData(form),
       processData: false,
       dataType: 'json',
       contentType: false,
       beforeSend: function () {
-        $(document).find('span.error-text').text('')
-        $('#quickid').after('<span class="wait"></span>')
-        $('#quickid').attr('disabled', true)
+        $(form).find('span.error-text').text('')
+        $(form).find('.wait').remove()
+        $(form).after('<span class="wait"></span>')
+        $submitBtn.prop('disabled', true)
       },
       complete: function () {
         $('.wait').remove()
-        $('#quickid').attr('disabled', false)
+        $submitBtn.prop('disabled', false)
       },
       success: function (data) {
         if (data.status == 0) {
           // Validation failed: NO conversion hit
           $.each(data.error, function (prefix, val) {
-            $('span.' + prefix + '_error').text(val[0])
+            $(form).find('span.' + prefix + '_error').text(val[0])
           })
         } else {
           // Success: Show toastr, reset form, and FIRE CONVERSION HIT
-          toastr.success(data.msg)
-          $('#quickid')[0].reset()
-          triggerGoogleAdsConversion()
+          if (typeof toastr !== 'undefined') {
+            toastr.success(data.msg)
+          } else {
+            alert(data.msg)
+          }
+          form.reset()
+          triggerGoogleAdsConversion(form)
         }
       },
+      error: function () {
+        if (typeof toastr !== 'undefined') {
+          toastr.error('Submission failed. Please check your inputs.')
+        }
+      }
     })
   })
 
   // 2. Contact Page Form
-  $('#contactid').on('submit', function (e) {
+  $(document).on('submit', 'form#contactid', function (e) {
     e.preventDefault()
+    var form = this
+    var $submitBtn = $(form).find('button[type="submit"], input[type="submit"]')
+
     $.ajax({
-      url: $(this).attr('action'),
-      method: $(this).attr('method'),
-      data: new FormData(this),
+      url: $(form).attr('action'),
+      method: $(form).attr('method') || 'POST',
+      data: new FormData(form),
       processData: false,
       dataType: 'json',
       contentType: false,
       beforeSend: function () {
-        $(document).find('span.error-text').text('')
+        $(form).find('span.error-text').text('')
+        $submitBtn.prop('disabled', true)
+      },
+      complete: function () {
+        $submitBtn.prop('disabled', false)
       },
       success: function (data) {
         if (data.status == 0) {
           $.each(data.error, function (prefix, val) {
-            $('span.' + prefix + '_error').text(val[0])
+            $(form).find('span.' + prefix + '_error').text(val[0])
           })
         } else {
-          $('#contactid')[0].reset()
+          form.reset()
           alert(data.msg)
-          triggerGoogleAdsConversion()
+          triggerGoogleAdsConversion(form)
         }
-      },
+      }
     })
   })
 
   // 3. Tour Booking Form
-  $('#tourid').on('submit', function (e) {
+  $(document).on('submit', 'form#tourid', function (e) {
     e.preventDefault()
+    var form = this
+    var $submitBtn = $(form).find('button[type="submit"], input[type="submit"]')
+
     $.ajax({
-      url: $(this).attr('action'),
-      method: $(this).attr('method'),
-      data: new FormData(this),
+      url: $(form).attr('action'),
+      method: $(form).attr('method') || 'POST',
+      data: new FormData(form),
       processData: false,
       dataType: 'json',
       contentType: false,
       beforeSend: function () {
-        $(document).find('span.error-text').text('')
+        $(form).find('span.error-text').text('')
+        $submitBtn.prop('disabled', true)
+      },
+      complete: function () {
+        $submitBtn.prop('disabled', false)
       },
       success: function (data) {
         if (data.status == 0) {
           $.each(data.error, function (prefix, val) {
-            $('span.' + prefix + '_error').text(val[0])
+            $(form).find('span.' + prefix + '_error').text(val[0])
           })
         } else {
-          $('#tourid')[0].reset()
+          form.reset()
           alert(data.msg)
-          triggerGoogleAdsConversion()
+          triggerGoogleAdsConversion(form)
         }
-      },
+      }
     })
   })
 
   // 4. Payment Form
-  $('#paymentid').on('submit', function (e) {
+  $(document).on('submit', 'form#paymentid', function (e) {
     e.preventDefault()
-    var callback = $(this).attr('class')
+    var form = this
+    var callback = $(form).attr('class')
+    var $submitBtn = $(form).find('button[type="submit"], input[type="submit"]')
+
     $.ajax({
-      url: $(this).attr('action'),
-      method: $(this).attr('method'),
-      data: new FormData(this),
+      url: $(form).attr('action'),
+      method: $(form).attr('method') || 'POST',
+      data: new FormData(form),
       processData: false,
       dataType: 'json',
       contentType: false,
       beforeSend: function () {
-        $(document).find('span.error-text').text('')
-        $('#paymentid').after('<span class="wait"></span>')
-        $('#paymentid').attr('disabled', true)
+        $(form).find('span.error-text').text('')
+        $(form).after('<span class="wait"></span>')
+        $submitBtn.prop('disabled', true)
       },
       complete: function () {
         $('.wait').remove()
-        $('#paymentid').attr('disabled', false)
+        $submitBtn.prop('disabled', false)
       },
       success: function (data) {
         if (data.status == 0) {
           $.each(data.error, function (prefix, val) {
-            $('span.' + prefix + '_error').text(val[0])
+            $(form).find('span.' + prefix + '_error').text(val[0])
           })
         } else {
-          toastr.success(data.msg)
-          $('#paymentid')[0].reset()
-          triggerGoogleAdsConversion()
+          if (typeof toastr !== 'undefined') {
+            toastr.success(data.msg)
+          }
+          form.reset()
+          triggerGoogleAdsConversion(form)
           location.href = rootpath() + callback
         }
-      },
+      }
     })
   })
 
-  // Handle Floating Glassmorphism Slider Forms (Home & Project Details)
-  $('.ajax-glass-form').on('submit', function (e) {
+  // 5. Floating Glassmorphism Slider Forms (Home & Project Details)
+  $(document).on('submit', 'form.ajax-glass-form', function (e) {
     e.preventDefault()
-    var $form = $(this)
-    var $btn = $form.find('button[type="submit"]')
+    var form = this
+    var $btn = $(form).find('button[type="submit"], input[type="submit"]')
 
     $.ajax({
-      url: $form.attr('action'),
-      method: $form.attr('method'),
-      data: new FormData(this),
+      url: $(form).attr('action'),
+      method: $(form).attr('method') || 'POST',
+      data: new FormData(form),
       processData: false,
       dataType: 'json',
       contentType: false,
       beforeSend: function () {
-        $form.find('span.error-text').text('')
+        $(form).find('span.error-text').text('')
         $btn.prop('disabled', true).text('Submitting...')
       },
       complete: function () {
@@ -164,51 +206,60 @@ $(document).ready(function () {
         if (data.status == 0) {
           // Validation error: Show error texts, NO conversion
           $.each(data.error, function (prefix, val) {
-            $form.find('span.' + prefix + '_error').text(val[0])
+            $(form).find('span.' + prefix + '_error').text(val[0])
           })
         } else {
           // Success: Show toast, reset form, and fire Google Ads conversion
-          toastr.success(data.msg || 'Thank you! We will get in touch shortly.')
-          $form[0].reset()
-          triggerGoogleAdsConversion()
+          if (typeof toastr !== 'undefined') {
+            toastr.success(data.msg || 'Thank you! We will get in touch shortly.')
+          }
+          form.reset()
+          triggerGoogleAdsConversion(form)
         }
       },
       error: function () {
-        toastr.error('Something went wrong. Please try again.')
+        if (typeof toastr !== 'undefined') {
+          toastr.error('Something went wrong. Please try again.')
+        }
       }
     })
   })
 
-  // 5. Popup Modal Form
-  $('#modelid').on('submit', function (e) {
+  // 6. Popup Modal Form
+  $(document).on('submit', 'form#modelid', function (e) {
     e.preventDefault()
+    var form = this
+    var $submitBtn = $(form).find('button[type="submit"], input[type="submit"]')
+
     $.ajax({
-      url: $(this).attr('action'),
-      method: $(this).attr('method'),
-      data: new FormData(this),
+      url: $(form).attr('action'),
+      method: $(form).attr('method') || 'POST',
+      data: new FormData(form),
       processData: false,
       dataType: 'json',
       contentType: false,
       beforeSend: function () {
-        $(document).find('span.error-text').text('')
-        $('#modelid').after('<span class="wait"></span>')
-        $('#modelid').attr('disabled', true)
+        $(form).find('span.error-text').text('')
+        $(form).after('<span class="wait"></span>')
+        $submitBtn.prop('disabled', true)
       },
       complete: function () {
         $('.wait').remove()
-        $('#modelid').attr('disabled', false)
+        $submitBtn.prop('disabled', false)
       },
       success: function (data) {
         if (data.status == 0) {
           $.each(data.error, function (prefix, val) {
-            $('span.' + prefix + '_error').text(val[0])
+            $(form).find('span.' + prefix + '_error').text(val[0])
           })
         } else {
-          toastr.success(data.msg)
-          $('#modelid')[0].reset()
-          triggerGoogleAdsConversion()
+          if (typeof toastr !== 'undefined') {
+            toastr.success(data.msg)
+          }
+          form.reset()
+          triggerGoogleAdsConversion(form)
         }
-      },
+      }
     })
   })
 })
