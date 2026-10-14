@@ -307,9 +307,10 @@
 </div>
 </div>
 <div class="col-md-9">
-<div class="sbgwhite">
+<div class="sbgwhite contact-form-area position-relative">
+<div class="form-content-wrap">
 <form method="POST" class="form" autocomplete="off" id="quickid" action="{{route('common.send')}}">
-	<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">  
+    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">  
 <div class="row">
 <div class="col-md-6 col-12">
 <div class="form-group">  
@@ -364,7 +365,20 @@
 </div>
 </div>
 </div> 
-</form>	
+</form> 
+</div>
+
+<!-- In-place Confirmation Message for Project Enquiry Form -->
+<div class="form-success-box text-center py-5" style="display: none;">
+    <div style="font-size: 55px; color: #28a745; margin-bottom: 15px;">
+        <i class="fa fa-check-circle"></i>
+    </div>
+    <h3 style="font-size: 26px; font-weight: 700; color: #1a1a1a; margin-bottom: 10px;">Enquiry Submitted Successfully!</h3>
+    <p style="font-size: 15px; color: #555; max-width: 550px; margin: 0 auto; line-height: 1.6;">
+        Thank you for showing interest in <strong>{{ $info->title ?? 'this project' }}</strong>. Our project specialist will review your details and contact you shortly.
+    </p>
+</div>
+
 </div>
 </div>
 </div>
@@ -429,4 +443,3 @@
 </div>
 </section>
 @endif
-
