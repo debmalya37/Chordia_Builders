@@ -56,14 +56,20 @@ $(document).ready(function () {
             $(form).find('span.' + prefix + '_error').text(val[0])
           })
         } else {
-          // Success: Show toastr, reset form, and FIRE CONVERSION HIT
+          // Success: Reset form and FIRE CONVERSION HIT
           if (typeof toastr !== 'undefined') {
             toastr.success(data.msg)
-          } else {
-            alert(data.msg)
           }
           form.reset()
           triggerGoogleAdsConversion(form)
+
+          // Show in-place confirmation message
+          $(form).fadeOut(300, function() {
+            $(form).closest('.banner-lead-glass-card, .contact-form-area')
+                   .find('.form-content-wrap').hide();
+            $(form).closest('.banner-lead-glass-card, .contact-form-area')
+                   .find('.form-success-box').fadeIn(400);
+          });
         }
       },
       error: function () {
@@ -209,12 +215,20 @@ $(document).ready(function () {
             $(form).find('span.' + prefix + '_error').text(val[0])
           })
         } else {
-          // Success: Show toast, reset form, and fire Google Ads conversion
+          // Success: Reset form and FIRE CONVERSION HIT
           if (typeof toastr !== 'undefined') {
             toastr.success(data.msg || 'Thank you! We will get in touch shortly.')
           }
           form.reset()
           triggerGoogleAdsConversion(form)
+
+          // Show in-place confirmation message
+          $(form).fadeOut(300, function() {
+            $(form).closest('.banner-lead-glass-card, .contact-form-area')
+                   .find('.form-content-wrap').hide();
+            $(form).closest('.banner-lead-glass-card, .contact-form-area')
+                   .find('.form-success-box').fadeIn(400);
+          });
         }
       },
       error: function () {

@@ -2,7 +2,6 @@
 
 @section('content')
 
-<!-- 1. Eager loaded banner for fast LCP -->
 <!-- 1. Eager loaded banner for fast LCP with Floating Site Visit Form -->
 @if(!$banners->isEmpty())
 <section class="home-slider-wrapper">
@@ -31,54 +30,67 @@
     <!-- Floating Glassmorphism Booking Form Overlay -->
     <div class="banner-form-container">
         <div class="banner-lead-glass-card">
-            <h3>Book a Private Site Visit</h3>
-            <p class="subtitle">Experience luxury residences in person</p>
+            <div class="form-content-wrap">
+                <h3>Book a Private Site Visit</h3>
+                <p class="subtitle">Experience luxury residences in person</p>
 
-            <form method="POST" autocomplete="off" class="form ajax-glass-form" action="{{ route('common.send') }}">
-                @csrf
-                <input type="hidden" name="page_url" value="{{ url()->current() }}">
+                <form method="POST" autocomplete="off" class="form ajax-glass-form" action="{{ route('common.send') }}">
+                    @csrf
+                    <input type="hidden" name="page_url" value="{{ url()->current() }}">
 
-                <!-- 1. Residence Preference -->
-                <div class="form-group">
-                    <label for="home_residence">Which residence are you interested in?</label>
-                    <select name="residence_type" id="home_residence" required class="glass-input">
-                        <option value="" disabled selected>Select an option</option>
-                        <option value="2 BHK">2 BHK</option>
-                        <option value="3 BHK">3 BHK</option>
-                        <option value="4 BHK">4 BHK</option>
-                        <option value="Not sure yet">Not sure yet</option>
-                    </select>
-                </div>
+                    <!-- 1. Residence Preference -->
+                    <div class="form-group">
+                        <label for="home_residence">Which residence are you interested in?</label>
+                        <select name="residence_type" id="home_residence" required class="glass-input">
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="2 BHK">2 BHK</option>
+                            <option value="3 BHK">3 BHK</option>
+                            <option value="4 BHK">4 BHK</option>
+                            <option value="Not sure yet">Not sure yet</option>
+                        </select>
+                    </div>
 
-                <!-- 2. Specific Requirements -->
-                <div class="form-group">
-                    <label for="home_requirements">Requirements or questions?</label>
-                    <textarea name="messages" id="home_requirements" rows="2" class="glass-input" placeholder="e.g. Preferred floor, budget, possession timeline..."></textarea>
-                </div>
+                    <!-- 2. Specific Requirements -->
+                    <div class="form-group">
+                        <label for="home_requirements">Requirements or questions?</label>
+                        <textarea name="messages" id="home_requirements" rows="2" class="glass-input" placeholder="e.g. Preferred floor, budget, possession timeline..."></textarea>
+                    </div>
 
-                <!-- 3. Contact Info -->
-                <div class="form-group">
-                    <input type="text" name="name" class="glass-input" placeholder="Full Name *" required>
-                    <span class="text-danger small error-text name_error"></span>
-                </div>
+                    <!-- 3. Contact Info -->
+                    <div class="form-group">
+                        <input type="text" name="name" class="glass-input" placeholder="Full Name *" required>
+                        <span class="text-danger small error-text name_error"></span>
+                    </div>
 
-                <div class="row no-gutters">
-                    <div class="col-6 pr-1">
-                        <div class="form-group">
-                            <input type="email" name="email" class="glass-input" placeholder="Email Address *" required>
-                            <span class="text-danger small error-text email_error"></span>
+                    <div class="row no-gutters">
+                        <div class="col-6 pr-1">
+                            <div class="form-group">
+                                <input type="email" name="email" class="glass-input" placeholder="Email Address *" required>
+                                <span class="text-danger small error-text email_error"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 pl-1">
+                            <div class="form-group">
+                                <input type="tel" name="phone" class="glass-input" placeholder="Phone Number *" pattern="[0-9]{10}" title="10-digit mobile number" required>
+                                <span class="text-danger small error-text phone_error"></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-6 pl-1">
-                        <div class="form-group">
-                            <input type="tel" name="phone" class="glass-input" placeholder="Phone Number *" pattern="[0-9]{10}" title="10-digit mobile number" required>
-                            <span class="text-danger small error-text phone_error"></span>
-                        </div>
-                    </div>
-                </div>
 
-                <button type="submit" class="btn-glass-submit">Request Site Visit</button>
-            </form>
+                    <button type="submit" class="btn-glass-submit">Request Site Visit</button>
+                </form>
+            </div>
+
+            <!-- In-place Confirmation Message for Banner Form -->
+            <div class="form-success-box text-center py-4" style="display: none;">
+                <div style="font-size: 45px; color: #28a745; margin-bottom: 12px;">
+                    <i class="fa fa-check-circle"></i>
+                </div>
+                <h4 style="color: #fff; font-size: 22px; margin-bottom: 8px;">Request Received!</h4>
+                <p style="color: #e0e0e0; font-size: 14px; line-height: 1.6;">
+                    Thank you for your interest. Our luxury living advisor will get in touch with you shortly to confirm your private site visit.
+                </p>
+            </div>
         </div>
     </div>
 </section>
@@ -377,6 +389,18 @@ Join hundreds of happy families who have made Chordia Builders their trusted cho
 </div>
 </div>
 </form>
+
+<!-- In-place Confirmation Message for Bottom Get in Touch Form -->
+<div class="form-success-box text-center py-4" style="display: none; background: #fdfdfd; border-radius: 8px; border: 1px solid #e1e1e1;">
+    <div style="font-size: 50px; color: #28a745; margin-bottom: 12px;">
+        <i class="fa fa-check-circle"></i>
+    </div>
+    <h3 style="font-size: 24px; margin-bottom: 8px; color: #333;">Thank You for Reaching Out!</h3>
+    <p style="font-size: 15px; color: #666; max-width: 600px; margin: 0 auto;">
+        We have received your message. A dedicated representative from Chordia Builders will connect with you shortly.
+    </p>
+</div>
+
 </div>   
 </div>  
 </div>
