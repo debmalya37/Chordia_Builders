@@ -88,7 +88,7 @@
             /* Google Analytics 4 */
             gtag('config', 'G-0K8VC930RS');
 
-            /* Google Ads Base Config ONLY (No conversion event here) */
+          
             gtag('config', 'AW-17559730445');
         }, 3500);
     });

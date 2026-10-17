@@ -3,21 +3,29 @@ function rootpath() {
   return root
 }
 
-// Global conversion trigger helper
+// Global conversion trigger helper with de-duplication guard
 function triggerGoogleAdsConversion(formElement) {
   var formAction = formElement ? $(formElement).attr('action') : window.location.href
 
-  // 1. Send Google Ads Lead Conversion Hit
+  // Prevent multiple duplicate fires on rapid clicks
+  if (formElement && $(formElement).data('conversion-sent')) {
+    return
+  }
+  if (formElement) {
+    $(formElement).data('conversion-sent', true)
+  }
+
+  // 1. Send Google Ads Lead Conversion Hit with client's exact label
   if (typeof gtag === 'function') {
     gtag('event', 'conversion', {
-      'send_to': 'AW-17559730445/z5lHCMvWj8IbEI3ykLVB',
+      'send_to': 'AW-17559730445/z5lHCMwWj8IbE13ykLVB',
       'value': 1.0,
       'currency': 'INR'
     })
-    console.log('Google Ads lead conversion fired successfully.')
+    console.log('Google Ads lead conversion fired successfully for AW-17559730445/z5lHCMwWj8IbE13ykLVB')
   }
 
-  // 2. Push explicit submit event to dataLayer for Google Tag Assistant
+  // 2. Push explicit submit event to dataLayer for Google Tag Assistant & GA4
   window.dataLayer = window.dataLayer || []
   window.dataLayer.push({
     'event': 'lead_form_submitted',
@@ -26,8 +34,8 @@ function triggerGoogleAdsConversion(formElement) {
 }
 
 $(document).ready(function () {
-  // 1. Quick Inquiry Form (Targets the FORM tag specifically so button ID collision is avoided)
-  $(document).on('submit', 'form#quickid', function (e) {
+  // 1. Quick Inquiry Form & /buy-flats-in-jaipur forms (form#quickid or any posting to /sendcommon)
+  $(document).on('submit', 'form#quickid, form[action*="sendcommon"]', function (e) {
     e.preventDefault()
     var form = this
     var $submitBtn = $(form).find('button[type="submit"], input[type="submit"]')
@@ -59,17 +67,19 @@ $(document).ready(function () {
           // Success: Reset form and FIRE CONVERSION HIT
           if (typeof toastr !== 'undefined') {
             toastr.success(data.msg)
+          } else {
+            alert(data.msg || 'Thank you! Your enquiry has been received.')
           }
-          form.reset()
           triggerGoogleAdsConversion(form)
+          form.reset()
 
           // Show in-place confirmation message
-          $(form).fadeOut(300, function() {
+          $(form).fadeOut(300, function () {
             $(form).closest('.banner-lead-glass-card, .contact-form-area')
-                   .find('.form-content-wrap').hide();
+                   .find('.form-content-wrap').hide()
             $(form).closest('.banner-lead-glass-card, .contact-form-area')
-                   .find('.form-success-box').fadeIn(400);
-          });
+                   .find('.form-success-box').fadeIn(400)
+          })
         }
       },
       error: function () {
@@ -219,16 +229,16 @@ $(document).ready(function () {
           if (typeof toastr !== 'undefined') {
             toastr.success(data.msg || 'Thank you! We will get in touch shortly.')
           }
-          form.reset()
           triggerGoogleAdsConversion(form)
+          form.reset()
 
           // Show in-place confirmation message
-          $(form).fadeOut(300, function() {
+          $(form).fadeOut(300, function () {
             $(form).closest('.banner-lead-glass-card, .contact-form-area')
-                   .find('.form-content-wrap').hide();
+                   .find('.form-content-wrap').hide()
             $(form).closest('.banner-lead-glass-card, .contact-form-area')
-                   .find('.form-success-box').fadeIn(400);
-          });
+                   .find('.form-success-box').fadeIn(400)
+          })
         }
       },
       error: function () {
@@ -276,4 +286,29 @@ $(document).ready(function () {
       }
     })
   })
+})
+
+// 7. Global Safety Fallback for /buy-flats-in-jaipur or any custom AJAX form submitting to /sendcommon
+$(document).ajaxSuccess(function (event, xhr, settings) {
+  if (settings.url && settings.url.indexOf('sendcommon') !== -1) {
+    try {
+      var res = JSON.parse(xhr.responseText)
+      if (res.status != 0 && (res.status == 1 || res.status == 200 || res.success)) {
+        if (typeof gtag === 'function' && !window._globalConversionFired) {
+          window._globalConversionFired = true
+          gtag('event', 'conversion', {
+            'send_to': 'AW-17559730445/z5lHCMwWj8IbE13ykLVB',
+            'value': 1.0,
+            'currency': 'INR'
+          })
+          console.log('Global fallback conversion hit sent to AW-17559730445/z5lHCMwWj8IbE13ykLVB')
+          setTimeout(function () {
+            window._globalConversionFired = false
+          }, 3500)
+        }
+      }
+    } catch (e) {
+      // Non-JSON response handling
+    }
+  }
 })
