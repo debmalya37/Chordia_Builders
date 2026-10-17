@@ -5,32 +5,34 @@ function rootpath() {
 
 // Global conversion trigger helper with de-duplication guard
 function triggerGoogleAdsConversion(formElement) {
-  var formAction = formElement ? $(formElement).attr('action') : window.location.href
+  var formAction = formElement ? $(formElement).attr('action') : window.location.href;
 
-  // Prevent multiple duplicate fires on rapid clicks
-  if (formElement && $(formElement).data('conversion-sent')) {
-    return
-  }
-  if (formElement) {
-    $(formElement).data('conversion-sent', true)
-  }
+  // Initialize dataLayer safely
+  window.dataLayer = window.dataLayer || [];
 
-  // 1. Send Google Ads Lead Conversion Hit with client's exact label
-  if (typeof gtag === 'function') {
-    gtag('event', 'conversion', {
+  // 1. Send via gtag if available
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'conversion', {
       'send_to': 'AW-17559730445/z5lHCMwWj8IbE13ykLVB',
       'value': 1.0,
       'currency': 'INR'
-    })
-    console.log('Google Ads lead conversion fired successfully for AW-17559730445/z5lHCMwWj8IbE13ykLVB')
+    });
+  } else {
+    // Direct dataLayer fallback for gtag
+    window.dataLayer.push('event', 'conversion', {
+      'send_to': 'AW-17559730445/z5lHCMwWj8IbE13ykLVB',
+      'value': 1.0,
+      'currency': 'INR'
+    });
   }
 
-  // 2. Push explicit submit event to dataLayer for Google Tag Assistant & GA4
-  window.dataLayer = window.dataLayer || []
+  // 2. Push explicit submit event for GTM
   window.dataLayer.push({
     'event': 'lead_form_submitted',
     'form_destination': formAction
-  })
+  });
+
+  console.log('Google Ads Conversion Event fired for: AW-17559730445/z5lHCMwWj8IbE13ykLVB');
 }
 
 $(document).ready(function () {
