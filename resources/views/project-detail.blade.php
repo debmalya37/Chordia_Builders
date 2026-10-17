@@ -31,7 +31,7 @@
                     <label for="eraya_residence">Which residence are you interested in?</label>
                     <select name="residence_type" id="eraya_residence" required class="glass-input">
                         <option value="" disabled selected>Select an option</option>
-                        <option value="2 BHK">2 BHK</option>
+                        <!-- <option value="2 BHK">2 BHK</option> -->
                         <option value="3 BHK">3 BHK</option>
                         <option value="4 BHK">4 BHK</option>
                         <option value="Not sure yet">Not sure yet</option>
