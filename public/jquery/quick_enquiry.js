@@ -18,10 +18,10 @@ function triggerGoogleAdsConversion(formElement) {
   // Ensure dataLayer exists
   window.dataLayer = window.dataLayer || [];
 
-  // 1. Official Google Ads gtag conversion dispatch (for standalone tracking)
+  // 1. Official Google Ads gtag conversion dispatch (Adapted from client's new snippet)
   if (typeof window.gtag === 'function') {
     window.gtag('event', 'conversion', {
-      'send_to': 'AW-17559730445/z5lHCMwWj8IbE13ykLVB',
+      'send_to': 'AW-17559730445/z5lHCMvWj8IbEI3ykLVB',
       'value': 1.0,
       'currency': 'INR'
     });
@@ -30,9 +30,9 @@ function triggerGoogleAdsConversion(formElement) {
   // 2. Google Tag Manager / GA4 standard custom conversion payload
   window.dataLayer.push({
     'event': 'conversion',
-    'send_to': 'AW-17559730445/z5lHCMwWj8IbE13ykLVB',
+    'send_to': 'AW-17559730445/z5lHCMvWj8IbEI3ykLVB',
     'conversion_id': 'AW-17559730445',
-    'conversion_label': 'z5lHCMwWj8IbE13ykLVB',
+    'conversion_label': 'z5lHCMvWj8IbEI3ykLVB',
     'value': 1.0,
     'currency': 'INR'
   });
@@ -43,7 +43,7 @@ function triggerGoogleAdsConversion(formElement) {
     'form_destination': formAction
   });
 
-  console.log('Google Ads Conversion Event fired for: AW-17559730445/z5lHCMwWj8IbE13ykLVB');
+  console.log('Google Ads Conversion Event fired for: AW-17559730445/z5lHCMvWj8IbEI3ykLVB');
 }
 
 $(document).ready(function () {
@@ -336,22 +336,22 @@ $(document).ajaxSuccess(function (event, xhr, settings) {
           
           window.dataLayer.push({
             'event': 'conversion',
-            'send_to': 'AW-17559730445/z5lHCMwWj8IbE13ykLVB',
+            'send_to': 'AW-17559730445/z5lHCMvWj8IbEI3ykLVB',
             'conversion_id': 'AW-17559730445',
-            'conversion_label': 'z5lHCMwWj8IbE13ykLVB',
+            'conversion_label': 'z5lHCMvWj8IbEI3ykLVB',
             'value': 1.0,
             'currency': 'INR'
           });
 
           if (typeof gtag === 'function') {
             gtag('event', 'conversion', {
-              'send_to': 'AW-17559730445/z5lHCMwWj8IbE13ykLVB',
+              'send_to': 'AW-17559730445/z5lHCMvWj8IbEI3ykLVB',
               'value': 1.0,
               'currency': 'INR'
             })
           }
           
-          console.log('Global fallback conversion hit sent to AW-17559730445/z5lHCMwWj8IbE13ykLVB')
+          console.log('Global fallback conversion hit sent to AW-17559730445/z5lHCMvWj8IbEI3ykLVB')
           setTimeout(function () {
             window._globalConversionFired = false
           }, 3500)
