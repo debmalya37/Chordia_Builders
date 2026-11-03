@@ -31,7 +31,9 @@ jobs:
         npm install
         npm run prod 
 
-    - name: Sync Files via FTP
+    - name: Sync Files via FTP (attempt 1)
+      id: ftp_deploy_attempt_1
+      continue-on-error: true
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
@@ -44,3 +46,26 @@ jobs:
           **/node_modules/**
           .env
           .env.example
+
+    - name: Sync Files via FTP (attempt 2)
+      id: ftp_deploy_attempt_2
+      if: steps.ftp_deploy_attempt_1.outcome == 'failure'
+      continue-on-error: true
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: /
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          .env
+          .env.example
+
+    - name: Fail deployment after retries
+      if: steps.ftp_deploy_attempt_1.outcome == 'failure' && steps.ftp_deploy_attempt_2.outcome == 'failure'
+      run: |
+        echo "FTP deploy failed after 2 attempts."
+        exit 1
