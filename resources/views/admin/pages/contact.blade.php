@@ -17,14 +17,16 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12" style="overflow-x: auto;">
                 <table class="table table-striped table-bordered dataTable" id="editable-datatable" style="cursor: pointer;" role="grid" aria-describedby="editable-datatable_info">
                     <thead>
                         <tr>
                             <th>SN</th>
-                            <th>name</th>
-                            <th>email</th>
+                            <th>Name</th>
+                            <th>Email</th>
                             <th>Phone</th>
+                            <th>Message</th>
+                            <th>Submitted At</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -33,9 +35,11 @@
                             @foreach($datas as $record)
                             <tr id="dels{{ $record->id }}">
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td><a class="text-red" title="{{ $record->messages }}">{{ $record->name }}</a></td>
+                                <td>{{ $record->name }}</td>
                                 <td>{{ $record->email }}</td>
                                 <td>{{ $record->phone }}</td>
+                                <td>{{ $record->messages ?? 'N/A' }}</td>
+                                <td>{{ $record->created_at ? date('d-M-Y h:i A', strtotime($record->created_at)) : 'N/A' }}</td>
                                 <td>
                                     <a class="btn btn-danger btn-sm" title="Delete" id="delete_single" data-url="contact/delete" data-id="{{ $record->id }}" data-token="{{ csrf_token() }}"> 
                                         <i class="typcn typcn-delete"></i>
@@ -45,7 +49,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5" class="text-center">No record found</td>
+                                <td colspan="7" class="text-center">No record found</td>
                             </tr>
                         @endif
                     </tbody>
