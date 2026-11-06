@@ -324,7 +324,8 @@ $(document).ready(function () {
 // 7. GLOBAL SAFETY FALLBACK FOR CUSTOM AJAX SUBMISSIONS
 // =========================================================================
 $(document).ajaxSuccess(function (event, xhr, settings) {
-  if (settings.url && settings.url.indexOf('sendcommon') !== -1) {
+  // UPDATED: Now listens for both standard enquiries AND the new banner route
+  if (settings.url && (settings.url.indexOf('sendcommon') !== -1 || settings.url.indexOf('send-banner') !== -1)) {
     try {
       var res = JSON.parse(xhr.responseText)
       if (res.status != 0 && (res.status == 1 || res.status == 200 || res.success)) {

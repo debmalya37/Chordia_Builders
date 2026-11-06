@@ -6,6 +6,7 @@ use App\Models\General;
 use App\Models\ContactEnquiry;
 use App\Models\GeneralEnquiry;
 use App\Models\CareerEnquiry;
+use App\Models\BannerEnquiry; // NEW: Import the BannerEnquiry model
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Helpers\GeneralHelper;
@@ -27,14 +28,14 @@ return response()->json(['status'=>0,'error'=>$validator->errors()->toArray()]);
 
 
 $data   = $request->all();
-if(!empty($request->input('social'))) {	
+if(!empty($request->input('social'))) { 
 foreach ($request->input('social') as $key=> $adsocial) {
 $array[]=array(
-'social_key' 	=>  $key,
-'social_title' 	=> 	$adsocial['sotitle'],
-'social_url' 	=>  $adsocial['sourl'],
-'social_icon' 	=>  $adsocial['soicon'],
-'sort_order' 	=>  $adsocial['sort'],
+'social_key'    =>  $key,
+'social_title'  =>  $adsocial['sotitle'],
+'social_url'    =>  $adsocial['sourl'],
+'social_icon'   =>  $adsocial['soicon'],
+'sort_order'    =>  $adsocial['sort'],
 );
 }
 $data['social_data'] = json_encode($array);
@@ -83,14 +84,14 @@ $this->validate($request, [
 $data   = $request->all();
 $get_record = General::find($data['id']);
 
-if(!empty($request->input('social'))) {	
+if(!empty($request->input('social'))) { 
 foreach ($request->input('social') as $key=> $adsocial) {
 $array[]=array(
-'social_key' 	=>  $key,
-'social_title' 	=> 	$adsocial['sotitle'],
-'social_url' 	=>  $adsocial['sourl'],
-'social_icon' 	=>  $adsocial['soicon'],
-'sort_order' 	=>  $adsocial['sort'],
+'social_key'    =>  $key,
+'social_title'  =>  $adsocial['sotitle'],
+'social_url'    =>  $adsocial['sourl'],
+'social_icon'   =>  $adsocial['soicon'],
+'sort_order'    =>  $adsocial['sort'],
 );
 }
 $data['social_data'] = json_encode($array);
@@ -168,6 +169,26 @@ return response()->json(['status'=>'Record deleted successfully.']);
 return response()->json(['status'=>'Record deleted failed.']);
 }
 }
+
+// === NEW: Banner Enquiry Admin Methods ===
+public function bannerEnquiry()
+{
+    $head = "Banner Site Visit Enquiries";
+    $datas = BannerEnquiry::orderBy('created_at', 'DESC')->get();
+    return view('admin.pages.banner_enquiry', compact('head', 'datas')); // Make sure the path matches where you put the view file! (e.g. 'admin.pages.banner' or 'admin.enquiry.banner')
+}
+
+public function bannerDelete(Request $request)
+{
+    $get_record = BannerEnquiry::find($request->id);
+    if(!empty($get_record)){
+        $get_record->delete();
+        return response()->json(['status'=>1, 'msg'=>'Record deleted successfully.']);
+    } else {
+        return response()->json(['status'=>0, 'msg'=>'Record deleted failed.']);
+    }
+}
+// =======================================
 
 public function carrerenquiry(){
 $datas = CareerEnquiry::orderBy('created_at','DESC')->get();

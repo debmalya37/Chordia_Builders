@@ -193,13 +193,14 @@
 <span class="menu-title">Enquiry Master</span>
 <i class="menu-arrow"></i>
 </a>
-<div class="collapse {{ (request()->is('admin/enquiry/quick')) ? 'show' : '' }} {{ (request()->is('admin/enquiry/contact')) ? 'show' : '' }} {{ (request()->is('admin/enquiry/project')) ? 'show' : '' }} {{ (request()->is('admin/enquiry/customize')) ? 'show' : '' }} {{ (request()->is('admin/enquiry/common')) ? 'show' : '' }}" id="enquiry">
-<ul class="nav flex-column sub-menu">
-<li class="nav-item"> <a class="nav-link" href="{{ route('admin.enquiry.quick') }}">General Enquiry</a></li>
-<li class="nav-item"> <a class="nav-link" href="{{ route('admin.enquiry.contact') }}">Contact Enquiry</a></li>
-<!--<li class="nav-item"> <a class="nav-link" href="{{ route('admin.enquiry.project') }}">Project Enquiry</a></li>-->
-<li class="nav-item"> <a class="nav-link" href="{{ route('admin.enquiry.carrer') }}">Carrer Enquiry</a></li>
-</ul>
+<div class="collapse {{ (request()->is('admin/enquiry/quick')) ? 'show' : '' }} {{ (request()->is('admin/enquiry/contact')) ? 'show' : '' }} {{ (request()->is('admin/enquiry/project')) ? 'show' : '' }} {{ (request()->is('admin/enquiry/customize')) ? 'show' : '' }} {{ (request()->is('admin/enquiry/common')) ? 'show' : '' }} {{ (request()->is('admin/enquiry/banner')) ? 'show' : '' }}" id="enquiry">
+    <ul class="nav flex-column sub-menu">
+        <li class="nav-item"> <a class="nav-link" href="{{ route('admin.enquiry.quick') }}">General Enquiry</a></li>
+        <li class="nav-item"> <a class="nav-link" href="{{ route('admin.enquiry.contact') }}">Contact Enquiry</a></li>
+        <li class="nav-item"> <a class="nav-link" href="{{ route('admin.enquiry.banner') }}">Banner Enquiry</a></li>
+        <!--<li class="nav-item"> <a class="nav-link" href="{{ route('admin.enquiry.project') }}">Project Enquiry</a></li>-->
+        <li class="nav-item"> <a class="nav-link" href="{{ route('admin.enquiry.carrer') }}">Career Enquiry</a></li>
+    </ul>
 </div>
 </li>
 <li class="nav-item">

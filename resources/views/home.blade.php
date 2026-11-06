@@ -34,7 +34,8 @@
                 <h3>Book a Private Site Visit</h3>
                 <p class="subtitle">Experience luxury residences in person</p>
 
-                <form method="POST" autocomplete="off" class="form ajax-glass-form" action="{{ route('common.send') }}">
+                <!-- CHANGED ACTION ROUTE HERE -->
+                <form method="POST" autocomplete="off" class="form ajax-glass-form" action="{{ route('banner.send') }}">
                     @csrf
                     <input type="hidden" name="page_url" value="{{ url()->current() }}">
 
